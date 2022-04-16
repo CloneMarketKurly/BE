@@ -34,8 +34,11 @@ public class CommentService {
     }
 
     @Transactional
-    public void updateComment (Long id, CommentDto commentDto) {
+    public void updateComment (Long id, CommentDto commentDto, String username) {
         Comment comment = findComment(id);
+        if (!comment.getUserName().equals(username)){
+            throw new IllegalArgumentException("작성자 본인만 삭제가 가능합니다.");
+        }
         comment.setComment(commentDto.getComment());
         comment.setUserName(commentDto.getUserName());
 
