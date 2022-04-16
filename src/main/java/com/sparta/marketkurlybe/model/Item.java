@@ -22,7 +22,7 @@ public class Item {
     private String image;
 
     @Column(nullable = false)
-    private String price;
+    private int price;
 
     @Column
     private String des;
