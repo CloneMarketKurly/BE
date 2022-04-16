@@ -26,6 +26,9 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //jsoup 크롤링 의존성 추가
+   implementation 'org.jsoup:jsoup:1.14.3'
 }
 
 tasks.named('test') {
