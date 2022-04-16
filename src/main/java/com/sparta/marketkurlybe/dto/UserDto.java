@@ -3,9 +3,7 @@ package com.sparta.marketkurlybe.dto;
 import lombok.Getter;
 
 @Getter
-public class JoinDto {
+public class UserDto {
     private String userId;
-    private String userName;
     private String password;
-    private String passwordCheck;
 }
