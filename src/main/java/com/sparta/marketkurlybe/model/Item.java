@@ -18,11 +18,14 @@ public class Item {
     @Column(nullable = false)
     private String title;
 
-    @Column
-    private String des;
-
     @Column(nullable = false)
     private String image;
+
+    @Column(nullable = false)
+    private String price;
+
+    @Column
+    private String des;
 
     @Column
     private String detail_Image;
@@ -36,7 +39,6 @@ public class Item {
     @Column
     private String promise;
 
-    @Column(nullable = false)
-    private String price;
+
 
 }
