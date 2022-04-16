@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -21,6 +23,20 @@ import java.util.Map;
 public class ItemService {
 
     private final ItemRepository itemRepository;;
+
+    //메인페이지 조회
+    public List<String> getItemList() {
+      List<Item> itemList = itemRepository.findAll();
+        List<String> response = new ArrayList<>();
+
+        for (Item item : itemList){
+            response.add(item.getTitle());
+            response.add(item.getImage());
+            response.add(item.getPrice());
+        }
+
+        return response;
+    }
 
     //상세페이지 조회
     public Map<String, Object> getItemDetails(Long itemId) {
@@ -97,4 +113,5 @@ public class ItemService {
 ////        itemRepository.save(item);
 //    }
 }
+
 }
