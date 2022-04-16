@@ -30,7 +30,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "DETAIL_ID")
-    private Detail detail;
+    private Item detail;
 
     public Comment (CommentDto dto){
         this.setUserName(dto.getUserName());
