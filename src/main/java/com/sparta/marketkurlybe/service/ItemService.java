@@ -33,6 +33,7 @@ public class ItemService {
         ItemDetailsList.put("promise",items.getPromise());
         ItemDetailsList.put("price",items.getPrice());
 
+
         System.out.println("리스트 : " + ItemDetailsList);
 
         return ItemDetailsList;
