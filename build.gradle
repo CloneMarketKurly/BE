@@ -38,9 +38,9 @@ dependencies {
     // JWT
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     implementation 'commons-codec:commons-codec:1.15'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-    compileOnly 'com.auth0:java-jwt:3.19.1'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation 'com.auth0:java-jwt:3.19.1'
 
     // Java 10 이상일 경우 JWT 구현 시 에러가 발생할 수 있어 방지하기 위한 기능
     implementation 'org.glassfish.jaxb:jaxb-runtime'

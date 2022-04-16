@@ -8,8 +8,6 @@ import com.sparta.marketkurlybe.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,15 +15,6 @@ import java.util.Optional;
 public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-
-    public void login(UserDto userDto) {
-        User user = userRepository.findByUserId(userDto.getUserId()).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 아이디입니다.")
-        );
-        if(!passwordEncoder.matches(user.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("비밀번호를 다시 확인 해주세요.");
-        }
-    }
 
     public String join(JoinDto joinDto) {
         // Repository에서 Optional 타입으로 찾는다.

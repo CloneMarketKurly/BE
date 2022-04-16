@@ -38,6 +38,7 @@ public class FormLoginFilter extends UsernamePasswordAuthenticationFilter {
         }
 
         setDetails(request, authRequest);
-        return this.getAuthenticationManager().authenticate(authRequest); // todo: FormLoginAuthProvider 에서 처리
+        return this.getAuthenticationManager().authenticate(authRequest);
+        // todo: FormLoginAuthProvider 에서 처리
     }
 }

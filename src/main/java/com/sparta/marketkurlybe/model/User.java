@@ -23,9 +23,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String passwordCheck;
-
     public User(String userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;

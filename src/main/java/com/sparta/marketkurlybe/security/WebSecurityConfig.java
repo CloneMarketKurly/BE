@@ -18,6 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf().disable()
+                        .cors().configurationSource(corsConfigurationSource());
 
         // 서버에서 인증은 JWT로 인증하기 때문에 Session의 생성을 막습니다.
         http
@@ -80,6 +84,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 로그아웃 요청 처리 URL
                 .logoutUrl("/user/logout")
                 .permitAll();
+    }
+
+    // CORS 설정
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
@@ -113,10 +132,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("POST,/h2-console/**");
         // 회원 관리 API 허용
         skipPathList.add("GET,/user/**");
-        skipPathList.add("POST,/user/signup");
+        skipPathList.add("POST,/user/**");
 
         skipPathList.add("GET,/");
-        skipPathList.add("GET,/basic.js");
+        skipPathList.add("GET,/**.js");
 
         skipPathList.add("GET,/favicon.ico");
 
