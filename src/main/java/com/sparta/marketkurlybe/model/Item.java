@@ -18,22 +18,22 @@ public class Item {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column
     private String des;
 
     @Column(nullable = false)
     private String image;
 
-    @Column(nullable = false)
+    @Column
     private String detail_Image;
 
-    @Column(nullable = false)
+    @Column
     private String weight;
 
-    @Column(nullable = false)
+    @Column
     private String delivery;
 
-    @Column(nullable = false)
+    @Column
     private String promise;
 
     @Column(nullable = false)

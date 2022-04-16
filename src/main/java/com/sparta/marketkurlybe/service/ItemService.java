@@ -4,8 +4,13 @@ import com.sparta.marketkurlybe.model.Item;
 import com.sparta.marketkurlybe.repository.ItemRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,28 +38,25 @@ public class ItemService {
         ItemDetailsList.put("promise",items.getPromise());
         ItemDetailsList.put("price",items.getPrice());
 
-
         System.out.println("리스트 : " + ItemDetailsList);
 
         return ItemDetailsList;
-
     }
 
 
     //크롤링용
-//    private static String MarketKurly_URL = "https://www.kurly.com/shop/main/index.php";
-//
-//    @Transactional
-//    @PostConstruct
-//    public void getMarketKurlyDatas() throws IOException {
-//
-//        Document doc = Jsoup.connect(MarketKurly_URL).get();
-//
-//        //title
-//        Elements content = doc.select("div title");
-////        String str = content.toString();
-////        String title = str.substring(28,40);
-//        System.out.println("title " + content);
+    private static String MarketKurly_URL = "https://www.kurly.com/shop/main/index.php";
+
+    @PostConstruct
+    public void getMarketKurlyDatas() throws IOException {
+
+        Document doc = Jsoup.connect(MarketKurly_URL).get();
+
+        //title
+        Elements content = doc.select("img[class=erwlrj80 css-4jombx ebkj6fl0]");
+//        String str = content.toString();
+//        String title = str.substring(28,40);
+        System.out.println("title " + content);
 //
 ////        //desc
 ////        Elements description = doc.select("meta[property=og:description]");
@@ -94,4 +96,5 @@ public class ItemService {
 ////
 ////        itemRepository.save(item);
 //    }
+}
 }
