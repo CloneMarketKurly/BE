@@ -17,5 +17,6 @@ public class ItemController {
     @GetMapping("/item/details/{itemId}")
     public Map<String, Object> getItemDetails(@PathVariable Long itemId){
         return itemService.getItemDetails(itemId);
+
     }
 }
