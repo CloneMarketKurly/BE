@@ -17,6 +17,6 @@ public class JoinDto {
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{3,}", message = "비밀번호는 3자 이상 및 영문 대 소문자, 숫자를 사용하세요.")
     private String password;
 
-
+    @NotBlank(message = "비밀번호 확인은 필수 입력 값입니다.")
     private String passwordCheck;
 }
