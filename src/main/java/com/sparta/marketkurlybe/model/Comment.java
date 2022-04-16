@@ -14,7 +14,7 @@ public class Comment {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int commentId;
+    private Long commentId;
 
     @Column(nullable = false)
     private String userName;
@@ -29,8 +29,8 @@ public class Comment {
     private int help;
 
     @ManyToOne
-    @JoinColumn(name = "DETAIL_ID")
-    private Item detail;
+    @JoinColumn(name = "ITEM_ID")
+    private Item item;
 
     public Comment (CommentDto dto){
         this.setUserName(dto.getUserName());

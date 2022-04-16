@@ -20,11 +20,10 @@ public class CommentController {
 
 
     @PostMapping("/{itemId}/comments")
-    public ErrorResult newComment (@PathVariable int itemId, @RequestBody CommentDto commentDto) {
+    public ErrorResult newComment (@PathVariable Long itemId, @RequestBody CommentDto commentDto) {
         try {
             commentService.commentIn(itemId, commentDto);
 
-            //디테일 넣는거 추가하고 , 레포지토리에 save 해야함.
             return new ErrorResult(true, "후기 등록 완료!");
         } catch (NullPointerException e) {
             log.error("후기등록 에러",e.getMessage());
@@ -36,7 +35,7 @@ public class CommentController {
     }
 
     @PutMapping("/comments/{commentId}")
-    public ErrorResult editComment (@PathVariable int commentId, @RequestBody CommentDto commentDto){
+    public ErrorResult editComment (@PathVariable Long commentId, @RequestBody CommentDto commentDto){
         try {
             commentService.updateComment(commentId,commentDto);
             return new ErrorResult(true,"후기 수정 완료!");
@@ -47,7 +46,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/comments/{commentId}")
-    public ErrorResult deleteComment(@PathVariable int commentId){
+    public ErrorResult deleteComment(@PathVariable Long commentId){
         try {
             commentRepository.delete(commentService.findComment(commentId));
             return new ErrorResult(true, "후기가 삭제되었습니다");
