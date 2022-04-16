@@ -18,7 +18,7 @@ public class ItemController {
 
     //메인페이지 조회
     @GetMapping("/")
-    public List<String> getItemList(){
+    public Map<String, Object> getItemList(){
         return itemService.getItemList();
     }
 

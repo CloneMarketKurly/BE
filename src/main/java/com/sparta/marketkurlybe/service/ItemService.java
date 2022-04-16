@@ -25,14 +25,14 @@ public class ItemService {
     private final ItemRepository itemRepository;;
 
     //메인페이지 조회
-    public List<String> getItemList() {
+    public Map<String, Object> getItemList() {
       List<Item> itemList = itemRepository.findAll();
-        List<String> response = new ArrayList<>();
+        Map<String, Object> response = new HashMap<>();
 
         for (Item item : itemList){
-            response.add(item.getTitle());
-            response.add(item.getImage());
-            response.add(item.getPrice());
+            response.put("title", item.getTitle());
+            response.put("image", item.getImage());
+            response.put("price",item.getPrice());
         }
 
         return response;
