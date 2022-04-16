@@ -3,10 +3,12 @@ package com.sparta.marketkurlybe.controller;
 
 import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.repository.CommentRepository;
+import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.CommentService;
 import com.sparta.marketkurlybe.validator.ErrorResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -35,9 +37,10 @@ public class CommentController {
     }
 
     @PutMapping("/comments/{commentId}")
-    public ErrorResult editComment (@PathVariable Long commentId, @RequestBody CommentDto commentDto){
+    public ErrorResult editComment (@PathVariable Long commentId, @RequestBody CommentDto commentDto,
+                                    @AuthenticationPrincipal UserDetailsImpl userDetails){
         try {
-            commentService.updateComment(commentId,commentDto);
+            commentService.updateComment(commentId,commentDto, userDetails.getUsername());
             return new ErrorResult(true,"후기 수정 완료!");
         }catch (IllegalArgumentException e){
             log.error("후기수정 에러", e.getMessage());
