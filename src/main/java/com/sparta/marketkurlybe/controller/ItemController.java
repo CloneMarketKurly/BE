@@ -18,7 +18,4 @@ public class ItemController {
     public Map<String, Object> getItemDetails(@PathVariable Long itemId){
         return itemService.getItemDetails(itemId);
     }
-
-//    csv파일로 저장(엑셀)
-//    임포트데이터프롬파일
 }
