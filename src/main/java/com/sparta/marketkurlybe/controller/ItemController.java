@@ -18,5 +18,6 @@ public class ItemController {
     public Map<String, Object> getItemDetails(@PathVariable Long itemId){
         return itemService.getItemDetails(itemId);
 
+
     }
 }
