@@ -34,7 +34,7 @@ public class Item {
     private String weight;
 
     @Column
-    private String delivery;
+    private String packing;
 
     @Column
     private String promise;
