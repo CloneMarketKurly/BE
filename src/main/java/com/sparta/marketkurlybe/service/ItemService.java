@@ -4,14 +4,8 @@ import com.sparta.marketkurlybe.model.Item;
 import com.sparta.marketkurlybe.repository.ItemRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,18 +20,12 @@ public class ItemService {
     private final ItemRepository itemRepository;;
 
     //메인페이지 조회
-    public Map<String, Object> getItemList() {
+    public List<Item> getItemList() {
       List<Item> itemList = itemRepository.findAll();
-        Map<String, Object> response = new HashMap<>();
+        return itemList;
 
-        for (Item item : itemList){
-            response.put("title", item.getTitle());
-            response.put("image", item.getImage());
-            response.put("price",item.getPrice());
-        }
-
-        return response;
     }
+
 
     //상세페이지 조회
     public Map<String, Object> getItemDetails(Long itemId) {
@@ -51,7 +39,7 @@ public class ItemService {
         ItemDetailsList.put("image",items.getImage());
         ItemDetailsList.put("detail_Image",items.getDetail_Image());
         ItemDetailsList.put("weight",items.getWeight());
-        ItemDetailsList.put("delivery",items.getDelivery());
+        ItemDetailsList.put("delivery",items.getPacking());
         ItemDetailsList.put("promise",items.getPromise());
         ItemDetailsList.put("price",items.getPrice());
 
@@ -61,19 +49,19 @@ public class ItemService {
     }
 
 
-    //크롤링용
-    private static String MarketKurly_URL = "https://www.kurly.com/shop/main/index.php";
+//    //크롤링용
+//    private static String MarketKurly_URL = "https://www.kurly.com/shop/main/index.php";
+//
+//    @PostConstruct
+//    public void getMarketKurlyDatas() throws IOException {
+//
+//        Document doc = Jsoup.connect(MarketKurly_URL).get();
 
-    @PostConstruct
-    public void getMarketKurlyDatas() throws IOException {
-
-        Document doc = Jsoup.connect(MarketKurly_URL).get();
-
-        //title
-        Elements content = doc.select("img[class=erwlrj80 css-4jombx ebkj6fl0]");
-//        String str = content.toString();
-//        String title = str.substring(28,40);
-        System.out.println("title " + content);
+//        //title
+//        Elements content = doc.select("img[class=erwlrj80 css-4jombx ebkj6fl0]");
+////        String str = content.toString();
+////        String title = str.substring(28,40);
+//        System.out.println("title " + content);
 //
 ////        //desc
 ////        Elements description = doc.select("meta[property=og:description]");
@@ -113,6 +101,4 @@ public class ItemService {
 ////
 ////        itemRepository.save(item);
 //    }
-}
-
 }
