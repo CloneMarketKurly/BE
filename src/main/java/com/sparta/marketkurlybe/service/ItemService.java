@@ -21,7 +21,6 @@ public class ItemService {
     //메인페이지 조회
     public List<Item> getItemList() {
       List<Item> itemList = itemRepository.findAll();
-
         return itemList;
     }
 
