@@ -22,6 +22,8 @@ public class ItemController {
         return itemService.getItemList();
     }
 
+
+
     //상세페이지 조회
     @GetMapping("/item/details/{itemId}")
     public Map<String, Object> getItemDetails(@PathVariable Long itemId){
