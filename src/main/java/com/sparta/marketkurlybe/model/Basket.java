@@ -26,13 +26,13 @@ public class Basket {
     @JoinColumn(name = "userId")
     private User user;
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String image;
 
-    @Column
+    @Column(nullable = false)
     private int price;
 
     @Column(nullable = false)
