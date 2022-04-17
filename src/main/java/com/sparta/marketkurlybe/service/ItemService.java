@@ -22,6 +22,7 @@ public class ItemService {
     public List<Item> getItemList() {
       List<Item> itemList = itemRepository.findAll();
         return itemList;
+
     }
 
 
