@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -41,8 +44,42 @@ public class BasketService {
                 .title(item.getTitle())
                 .image(item.getImage())
                 .price(price)
+                .count(requestDto.getCount())
                 .build();
 
         basketRepository.save(basket);
+    }
+
+    //장바구니 목록 불러오기
+    //테스트 해보고 안되면 getUsername -> getUserId로 해보기
+    public Map<String,Object> getBasket(UserDetailsImpl userDetails) {
+        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
+                () -> new NullPointerException("회원이 존재하지 않습니다.")
+        );
+
+        List<Basket> basket = basketRepository.findByUser_Id(user.getUserName());
+
+        int delverFee = 3000;
+        int sumPrice = 0;
+
+        for (Basket basket1 : basket){
+            int price = basket1.getPrice();
+            sumPrice += price;
+        }
+
+        Map<String, Object> basketList = new HashMap<>();
+        basketList.put("List", basket);
+
+        if (sumPrice > 40000){
+            basketList.put("delverFee", 0);
+            basketList.put("totalPrice", sumPrice);
+        }else {
+            basketList.put("delverFee",delverFee);
+            basketList.put("totalPrice", delverFee + sumPrice);
+        }
+
+        return basketList;
+
+
     }
 }

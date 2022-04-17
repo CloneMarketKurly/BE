@@ -36,10 +36,14 @@ public class Basket {
     private int price;
 
     @Column(nullable = false)
-    private int totalPrice;
+    private int count;
 
-    @Column(nullable = false)
-    private int deliveryFee;
+    //굳이 없어도 될 듯
+//    @Column(nullable = false)
+//    private int totalPrice;
+//
+//    @Column(nullable = false)
+//    private int deliveryFee;
 
 
 }
