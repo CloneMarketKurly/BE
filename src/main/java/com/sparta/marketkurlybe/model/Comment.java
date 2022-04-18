@@ -17,7 +17,7 @@ public class Comment {
     private Long commentId;
 
     @Column(nullable = false)
-    private String userName;
+    private String userId;
 
     @Column(nullable = false)
     private String comment;
@@ -33,7 +33,7 @@ public class Comment {
     private Item item;
 
     public Comment (CommentDto dto){
-        this.setUserName(dto.getUserName());
+        this.setUserId(dto.getUserName());
         this.setComment(dto.getComment());
     }
 
