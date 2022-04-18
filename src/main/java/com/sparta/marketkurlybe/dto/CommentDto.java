@@ -9,8 +9,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class CommentDto {
 
-
     private String userId;
+
+    private Long commentId;
 
     private String comment;
 
@@ -23,5 +24,6 @@ public class CommentDto {
         this.setUserId(comment.getUserId());
         this.setTitle(comment.getTitle());
         this.setComment(comment.getComment());
+        this.setCommentId(comment.getCommentId());
     }
 }
