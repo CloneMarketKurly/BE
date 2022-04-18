@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelpController {
     private final HelpService helpService;
 
-    @PostMapping("/item/details/{itemId}/help")
-    public Boolean help(@PathVariable Long itemId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    @PostMapping("/item/details/{commentId}/help")
+    public Boolean help(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(userDetails == null){
             return false;
         }
-        return helpService.help(itemId, userDetails.getUsername());
+        return helpService.help(commentId, userDetails.getUsername());
     }
 }

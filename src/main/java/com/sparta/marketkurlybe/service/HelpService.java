@@ -14,14 +14,14 @@ public class HelpService {
     private final HelpRepository helpRepository;
 
     @Transactional
-    public Boolean help(Long itemId, String userId) {
-        Optional<Help> helpState = helpRepository.findByItemIdAndUserId(itemId, userId);
+    public Boolean help(Long commentId, String userId) {
+        Optional<Help> helpState = helpRepository.findByCommentIdAndUserId(commentId, userId);
         if(!helpState.isPresent()) {
-            Help help = new Help(itemId, userId);
+            Help help = new Help(commentId, userId);
             helpRepository.save(help);
             return true;
         }
-        helpRepository.deleteByItemIdAndUserId(itemId, userId);
+        helpRepository.deleteByCommentIdAndUserId(commentId, userId);
         return false;
     }
 }
