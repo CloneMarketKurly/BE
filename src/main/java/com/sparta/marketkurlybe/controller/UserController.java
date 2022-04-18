@@ -17,5 +17,8 @@ public class UserController {
     public ErrorResult join(@RequestBody JoinDto joinDto) {
         userService.join(joinDto);
         return new ErrorResult(true,"회원가입 완료!");
+
+        //user/login(id랑 패스워드만)
+
     }
 }
