@@ -5,6 +5,7 @@ import com.sparta.marketkurlybe.model.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+
 @Data
 @AllArgsConstructor
 public class CommentDto {
@@ -16,6 +17,8 @@ public class CommentDto {
     private String comment;
 
     private String title;
+
+    private String modifiedAt;
 //    private String image;
 //
 //    private int help;
@@ -25,5 +28,6 @@ public class CommentDto {
         this.setTitle(comment.getTitle());
         this.setComment(comment.getComment());
         this.setCommentId(comment.getCommentId());
+        this.setModifiedAt(comment.getModifiedAt());
     }
 }
