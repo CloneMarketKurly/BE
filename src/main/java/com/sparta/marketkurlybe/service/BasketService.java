@@ -1,6 +1,5 @@
 package com.sparta.marketkurlybe.service;
 
-import com.sparta.marketkurlybe.dto.BasketEditDto;
 import com.sparta.marketkurlybe.dto.BasketRequestDto;
 import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.model.Item;
@@ -27,9 +26,9 @@ public class BasketService {
 
     //장바구니 담기(회원용)
     @Transactional
-    public void crateBasket(BasketRequestDto requestDto, String userId) {
+    public void crateBasket(BasketRequestDto requestDto, UserDetailsImpl userDetails) {
 
-        User user = userRepository.findByUserId(userId).orElseThrow(
+        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
                 () -> new NullPointerException("회원이 존재하지 않습니다.")
         );
         Item item = itemRepository.findById(requestDto.getItemId()).orElseThrow(
@@ -80,8 +79,6 @@ public class BasketService {
         }
 
         return basketList;
-
-
     }
 
 //    //장바구니 수정(회원용)
@@ -98,4 +95,5 @@ public class BasketService {
 //
 //
 //    }
+
 }
