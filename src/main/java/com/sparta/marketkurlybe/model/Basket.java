@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class Basket {
+public class Basket extends Timestamped{
   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
