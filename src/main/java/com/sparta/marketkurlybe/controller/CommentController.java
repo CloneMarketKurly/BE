@@ -78,9 +78,9 @@ public class CommentController {
 //        }
 //    }
     @DeleteMapping("/comments/{commentId}")
-    public ResponseEntity<String> deleteComment(@PathVariable Long commentId){
-            commentRepository.delete(commentService.findComment(commentId));
-            return ResponseEntity.ok("후기 삭제 완료!");
+    public ResponseEntity<String> deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        commentService.deleteComment(commentId, userDetails.getUsername());
+        return ResponseEntity.ok("후기 삭제 완료!");
     }
 
 }

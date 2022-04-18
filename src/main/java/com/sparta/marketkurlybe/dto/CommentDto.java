@@ -9,7 +9,7 @@ import lombok.Data;
 public class CommentDto {
 
 
-    private String userName;
+    private String userId;
 
     private String comment;
 
