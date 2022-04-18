@@ -16,10 +16,6 @@ public class UserController {
 
     @PostMapping("/user/join")
     public ErrorResult join(@RequestBody JoinDto joinDto, Errors errors) {
-        if(errors.hasErrors()){
-
-        }
-        userService.join(joinDto);
-        return new ErrorResult(true,"회원가입 완료!");
+        return userService.join(joinDto);
     }
 }
