@@ -1,14 +1,12 @@
 package com.sparta.marketkurlybe.controller;
 
+import com.sparta.marketkurlybe.dto.BasketEditDto;
 import com.sparta.marketkurlybe.dto.BasketRequestDto;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -24,9 +22,16 @@ public class BasketController {
         basketService.crateBasket(requestDto, userDetails);
     }
 
+    //장바구니 불러오기(회원용)
     @GetMapping("/item/basket")
     public Map<String,Object> getBasket(@AuthenticationPrincipal UserDetailsImpl userDetails){
        return basketService.getBasket(userDetails);
     }
+
+//    //장바구니 수정
+//    @PutMapping("/item/basket/{basketId}")
+//    public Map<String, Object> editBasket(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long basketId, @RequestBody BasketEditDto basketEditDto){
+//        return basketService.editBasket(userDetails, basketId, basketEditDto);
+//    }
 
 }

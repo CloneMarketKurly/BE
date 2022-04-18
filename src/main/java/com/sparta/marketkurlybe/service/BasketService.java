@@ -1,5 +1,6 @@
 package com.sparta.marketkurlybe.service;
 
+import com.sparta.marketkurlybe.dto.BasketEditDto;
 import com.sparta.marketkurlybe.dto.BasketRequestDto;
 import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.model.Item;
@@ -50,7 +51,7 @@ public class BasketService {
         basketRepository.save(basket);
     }
 
-    //장바구니 목록 불러오기
+    //장바구니 불러오기(회원용)
     //테스트 해보고 안되면 getUsername -> getUserId로 해보기
     public Map<String,Object> getBasket(UserDetailsImpl userDetails) {
         User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
@@ -82,4 +83,9 @@ public class BasketService {
 
 
     }
+
+//    //장바구니 수정(회원용)
+//    @Transactional
+//    public Map<String, Object> editBasket(UserDetailsImpl userDetails, Long basketId, BasketEditDto basketEditDto) {
+//    }
 }
