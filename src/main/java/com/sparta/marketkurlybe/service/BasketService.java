@@ -1,7 +1,6 @@
 package com.sparta.marketkurlybe.service;
 
 import com.sparta.marketkurlybe.dto.BasketRequestDto;
-import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.model.Item;
 import com.sparta.marketkurlybe.model.User;
 import com.sparta.marketkurlybe.repository.BasketRepository;
