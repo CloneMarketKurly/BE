@@ -27,9 +27,9 @@ public class BasketService {
 
     //장바구니 담기(회원용)
     @Transactional
-    public void crateBasket(BasketRequestDto requestDto, UserDetailsImpl userDetails) {
+    public void crateBasket(BasketRequestDto requestDto, String userId) {
 
-        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
+        User user = userRepository.findByUserId(userId).orElseThrow(
                 () -> new NullPointerException("회원이 존재하지 않습니다.")
         );
         Item item = itemRepository.findById(requestDto.getItemId()).orElseThrow(

@@ -19,8 +19,6 @@ public class CommentDto {
 //
 //    private int help;
 
-//    private DetailDto detailDto;
-
     public CommentDto (Comment comment){
         this.setUserId(comment.getUserId());
         this.setTitle(comment.getTitle());
