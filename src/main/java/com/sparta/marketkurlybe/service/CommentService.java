@@ -42,6 +42,7 @@ public class CommentService {
         }
         comment.setComment(commentDto.getComment());
         comment.setUserId(commentDto.getUserId());
+        comment.setTitle(commentDto.getTitle());
 
     }
 

@@ -23,10 +23,13 @@ public class Comment {
     private String comment;
 
     @Column
-    private String image;
+    private String title;
 
-    @Column
-    private int help;
+//    @Column
+//    private String image;
+//
+//    @Column
+//    private int help;
 
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
@@ -35,6 +38,7 @@ public class Comment {
     public Comment (CommentDto dto){
         this.setUserId(dto.getUserId());
         this.setComment(dto.getComment());
+        this.setTitle(dto.getTitle());
     }
 
 
