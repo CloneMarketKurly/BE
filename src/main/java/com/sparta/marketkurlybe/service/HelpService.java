@@ -5,6 +5,7 @@ import com.sparta.marketkurlybe.repository.HelpRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class HelpService {
     private final HelpRepository helpRepository;
 
+    @Transactional
     public Boolean help(Long itemId, String userId) {
         Optional<Help> helpState = helpRepository.findByItemIdAndUserId(itemId, userId);
         if(!helpState.isPresent()) {
