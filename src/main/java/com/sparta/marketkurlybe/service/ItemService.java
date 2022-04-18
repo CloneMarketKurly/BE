@@ -1,11 +1,15 @@
 package com.sparta.marketkurlybe.service;
 
+import com.sparta.marketkurlybe.dto.CommentDto;
+import com.sparta.marketkurlybe.model.Comment;
 import com.sparta.marketkurlybe.model.Item;
+import com.sparta.marketkurlybe.repository.CommentRepository;
 import com.sparta.marketkurlybe.repository.ItemRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +21,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ItemService {
 
-    private final ItemRepository itemRepository;;
+    private final ItemRepository itemRepository;
+    private final CommentRepository commentRepository;
+
 
     //메인페이지 조회
     public List<Item> getItemList() {
@@ -32,6 +38,14 @@ public class ItemService {
                 () -> new NullPointerException("상품이 존재하지 않습니다.")
         );
 
+        List<Comment> commentList = commentRepository.findByItem_Id(itemId);
+        List<CommentDto> commentDtos = new ArrayList<>();
+
+        for (Comment comment : commentList){
+            CommentDto commentDto = new CommentDto(comment);
+            commentDtos.add(commentDto);
+        }
+
         Map<String, Object> ItemDetailsList = new HashMap<>();
         ItemDetailsList.put("title",items.getTitle());
         ItemDetailsList.put("des",items.getDes());
@@ -41,6 +55,7 @@ public class ItemService {
         ItemDetailsList.put("delivery",items.getPacking());
         ItemDetailsList.put("promise",items.getPromise());
         ItemDetailsList.put("price",items.getPrice());
+        ItemDetailsList.put("comments", commentDtos);
 
         System.out.println("리스트 : " + ItemDetailsList);
 
