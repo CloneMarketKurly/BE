@@ -19,7 +19,4 @@ public class CommentDto {
 //    private int help;
 
 //    private DetailDto detailDto;
-
-
-
 }
