@@ -11,6 +11,8 @@ import java.util.Collection;
 public class UserDetailsImpl implements UserDetails {
 
     private final User user;
+    // private final String userId;
+    // private final String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

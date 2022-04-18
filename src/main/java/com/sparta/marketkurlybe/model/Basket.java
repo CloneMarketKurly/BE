@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,7 +15,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @Getter
 public class Basket {
-
+  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -44,6 +43,4 @@ public class Basket {
 //
 //    @Column(nullable = false)
 //    private int deliveryFee;
-
-
 }
