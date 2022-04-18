@@ -7,14 +7,19 @@ import javax.validation.constraints.Pattern;
 
 @Getter
 public class JoinDto {
+
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String userId;
 
-    @NotBlank(message = "아이디는 필수 입력 값입니다.")
+    @NotBlank(message = "닉네임는 필수 입력 값입니다.")
     private String userName;
 
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
-    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{3,}", message = "비밀번호는 3자 이상 및 영문 대 소문자, 숫자를 사용하세요.")
+    @Pattern(
+            regexp = "/^(?=.*[A-Za-z])(?=.*[0-9])(?=\\S+$).{10,}|" +
+                    "(?=.*[0-9])(?=.*[$@!%*#?&])(?=\\S+$).{10,}|" +
+                    "(?=.*[A-Za-z])(?=.*[$@!%*#?&])(?=\\S+$).{10,}&",
+                    message = "10글자 이상, 영문/숫자/특수문자(공백 제외)/2개 이상의 조합을 사용해주세요.")
     private String password;
 
     @NotBlank(message = "비밀번호 확인은 필수 입력 값입니다.")
