@@ -87,5 +87,15 @@ public class BasketService {
 //    //장바구니 수정(회원용)
 //    @Transactional
 //    public Map<String, Object> editBasket(UserDetailsImpl userDetails, Long basketId, BasketEditDto basketEditDto) {
+//        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
+//                () -> new NullPointerException("회원이 존재하지 않습니다.")
+//        );
+//        Basket basket = basketRepository.findById(basketId).orElseThrow(
+//                () -> new NullPointerException("상품이 존재하지 않습니다.")
+//        );
+//
+//      Map<String, Object> reBasket = new HashMap<>();
+//
+//
 //    }
 }
