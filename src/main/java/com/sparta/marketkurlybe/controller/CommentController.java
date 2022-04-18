@@ -79,6 +79,8 @@ public class CommentController {
 //    }
     @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<String> deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        System.out.println(commentId);
+        System.out.println(userDetails.getUsername());
         commentService.deleteComment(commentId, userDetails.getUsername());
         return ResponseEntity.ok("후기 삭제 완료!");
     }
