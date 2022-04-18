@@ -33,7 +33,7 @@ public class Comment {
     private Item item;
 
     public Comment (CommentDto dto){
-        this.setUserId(dto.getUserName());
+        this.setUserId(dto.getUserId());
         this.setComment(dto.getComment());
     }
 
