@@ -15,13 +15,13 @@ public class Help {
     private Long helpId;
 
     @Column
-    private Long itemId;
+    private Long commentId;
 
     @Column
     private String userId;
 
-    public Help(Long itemId, String userId) {
-        this.itemId = itemId;
+    public Help(Long commentId, String userId) {
+        this.commentId = commentId;
         this.userId = userId;
     }
 }

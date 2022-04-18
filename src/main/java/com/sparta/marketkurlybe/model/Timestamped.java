@@ -23,6 +23,7 @@ public abstract class Timestamped {
     @LastModifiedDate // 마지막 수정일자임을 나타냅니다.
     private String modifiedAt;
 
+
     @PrePersist
     public void onPrePersist() {
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
