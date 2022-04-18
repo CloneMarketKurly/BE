@@ -19,7 +19,7 @@ public class BasketService {
     private final ItemRepository itemRepository;
     private final BuyItemListRepository buyItemListRepository;
 
-    //구매목록
+    //구매목료
     public void createBuyList(BuyItemListDto itemListDto) {
 
         Item item = itemRepository.findById(itemListDto.getItemId()).orElseThrow(

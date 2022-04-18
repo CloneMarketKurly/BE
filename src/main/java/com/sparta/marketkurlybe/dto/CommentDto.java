@@ -19,6 +19,8 @@ public class CommentDto {
     private String title;
 
     private String modifiedAt;
+
+    private Integer helpCnt;
 //    private String image;
 //
 //    private int help;
@@ -29,5 +31,6 @@ public class CommentDto {
         this.setComment(comment.getComment());
         this.setCommentId(comment.getCommentId());
         this.setModifiedAt(comment.getModifiedAt());
+        this.setHelpCnt(comment.getHelpCnt());
     }
 }

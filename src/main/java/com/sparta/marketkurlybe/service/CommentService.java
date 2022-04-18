@@ -2,6 +2,7 @@ package com.sparta.marketkurlybe.service;
 
 import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.model.Comment;
+import com.sparta.marketkurlybe.model.Help;
 import com.sparta.marketkurlybe.model.Item;
 import com.sparta.marketkurlybe.repository.CommentRepository;
 import com.sparta.marketkurlybe.repository.ItemRepository;

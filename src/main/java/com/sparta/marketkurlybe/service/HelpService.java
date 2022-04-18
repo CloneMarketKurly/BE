@@ -1,6 +1,8 @@
 package com.sparta.marketkurlybe.service;
 
+import com.sparta.marketkurlybe.model.Comment;
 import com.sparta.marketkurlybe.model.Help;
+import com.sparta.marketkurlybe.repository.CommentRepository;
 import com.sparta.marketkurlybe.repository.HelpRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,16 +14,26 @@ import java.util.Optional;
 @Service
 public class HelpService {
     private final HelpRepository helpRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public Boolean help(Long commentId, String userId) {
         Optional<Help> helpState = helpRepository.findByCommentIdAndUserId(commentId, userId);
+
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new NullPointerException("후기가 존재하지 않습니다.")
+        );
+
         if(!helpState.isPresent()) {
             Help help = new Help(commentId, userId);
             helpRepository.save(help);
+            comment.setHelpCnt(comment.getHelpCnt()+1);
             return true;
         }
+
         helpRepository.deleteByCommentIdAndUserId(commentId, userId);
+        comment.setHelpCnt(comment.getHelpCnt()-1);
         return false;
     }
+
 }

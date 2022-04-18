@@ -2,8 +2,10 @@ package com.sparta.marketkurlybe.service;
 
 import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.model.Comment;
+import com.sparta.marketkurlybe.model.Help;
 import com.sparta.marketkurlybe.model.Item;
 import com.sparta.marketkurlybe.repository.CommentRepository;
+import com.sparta.marketkurlybe.repository.HelpRepository;
 import com.sparta.marketkurlybe.repository.ItemRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
     private final CommentRepository commentRepository;
+    private final HelpRepository helpRepository;
 
 
     //메인페이지 조회
