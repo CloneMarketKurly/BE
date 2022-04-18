@@ -17,11 +17,16 @@ public class ItemController {
     private final ItemService itemService;
 
     //메인페이지 조회
+//    @GetMapping("/")
+//    public List<Item> getItemList(){
+//        return itemService.getItemList();
+//    }
+
+
     @GetMapping("/")
     public List<Item> getItemList(){
         return itemService.getItemList();
     }
-
 
 
     //상세페이지 조회
