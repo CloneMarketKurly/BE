@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/item/details")
+@RequestMapping("/item")
 @RequiredArgsConstructor
 public class BasketController {
     private final BasketService basketService;
@@ -19,8 +19,7 @@ public class BasketController {
     @PostMapping("/basket")
     public void crateBasket(@RequestBody BasketRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         //비회원 주문시, 예외처리 -> 프론트분들께 여쭤보기(로그인 회원이면 서버로 요청, 아니면 중간저장소에 저장 후 날림)
-        String userId = userDetails.getUsername();
-        basketService.crateBasket(requestDto, userId);
+        basketService.crateBasket(requestDto, userDetails);
     }
 
     //장바구니 불러오기(회원용)
