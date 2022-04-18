@@ -1,11 +1,12 @@
 package com.sparta.marketkurlybe.dto;
 
 
-import lombok.Builder;
+import com.sparta.marketkurlybe.model.Comment;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Builder
 @Data
+@AllArgsConstructor
 public class CommentDto {
 
 
@@ -19,4 +20,10 @@ public class CommentDto {
 //    private int help;
 
 //    private DetailDto detailDto;
+
+    public CommentDto (Comment comment){
+        this.setUserId(comment.getUserId());
+        this.setTitle(comment.getTitle());
+        this.setComment(comment.getComment());
+    }
 }

@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Map;
-import java.util.Optional;
+import java.util.List;
 
 @Entity
 @Builder
