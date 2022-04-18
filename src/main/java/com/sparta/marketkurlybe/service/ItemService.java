@@ -26,7 +26,6 @@ public class ItemService {
 
     }
 
-
     //상세페이지 조회
     public Map<String, Object> getItemDetails(Long itemId) {
        Item items = itemRepository.findById(itemId).orElseThrow(
