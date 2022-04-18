@@ -14,8 +14,7 @@ public class JoinDto {
     private String userName;
 
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
-    @Pattern(
-            regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{10,}", message = "10글자 이상, 영문/숫자/특수문자(공백 제외)/2개 이상의 조합을 사용해주세요.")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{10,}$|^(?=.*\\d)(?=.*[$@$!%*#?&])[\\d$@$!%*#?&]{10,}$|^(?=.*[$@$!%*#?&])(?=.*[A-Za-z])[A-Za-z$@$!%*#?&]{10,}$|^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{10,}$", message = "10글자 이상, 영문/숫자/특수문자(공백 제외)/2개 이상의 조합을 사용해주세요.")
     private String password;
 
     @NotBlank(message = "비밀번호 확인은 필수 입력 값입니다.")

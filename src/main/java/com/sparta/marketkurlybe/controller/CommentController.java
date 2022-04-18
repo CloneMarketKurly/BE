@@ -61,7 +61,7 @@ public class CommentController {
     @PutMapping("/comments/{commentId}")
     public ResponseEntity<String> editComment (@PathVariable Long commentId, @RequestBody CommentDto commentDto,
                                     @AuthenticationPrincipal UserDetailsImpl userDetails){
-
+        System.out.println(userDetails.getUsername());
             commentService.updateComment(commentId,commentDto, userDetails.getUsername());
         return ResponseEntity.ok("후기 수정 완료!");
     }
@@ -79,6 +79,8 @@ public class CommentController {
 //    }
     @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<String> deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        System.out.println(commentId);
+        System.out.println(userDetails.getUsername());
         commentService.deleteComment(commentId, userDetails.getUsername());
         return ResponseEntity.ok("후기 삭제 완료!");
     }
