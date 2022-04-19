@@ -24,12 +24,13 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment commentIn(Long itemId, CommentDto commentDto){
+    public Comment commentIn(Long itemId, CommentDto commentDto, String img){
         Item item = itemRepository.findById(itemId).orElseThrow(
                 ()-> new IllegalArgumentException("일치하는 상품 상세페이지가 없습니다.")
         );
         Comment comment = new Comment(commentDto);
         comment.setItem(item);
+        comment.setImage(img);
         commentRepository.save(comment);
         return comment;
     }

@@ -42,8 +42,7 @@ public class CommentController {
         //업로드
         System.out.println(itemId);
         String img = s3Uploader.upload(commentDto, imgFile);
-        commentDto.setImage(img);
-        Comment comment = commentService.commentIn(itemId, commentDto);
+        Comment comment = commentService.commentIn(itemId, commentDto,img);
         return comment.getCommentId();
     }
 
