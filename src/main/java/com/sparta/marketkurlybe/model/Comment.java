@@ -2,6 +2,7 @@ package com.sparta.marketkurlybe.model;
 
 import com.sparta.marketkurlybe.dto.CommentDto;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -25,11 +26,11 @@ public class Comment extends Timestamped{
     @Column
     private String title;
 
-//    @Column
+    //    @Column
 //    private String image;
-//
-//    @Column
-//    private int help;
+
+    @Column
+    private Integer helpCnt = 0;
 
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
