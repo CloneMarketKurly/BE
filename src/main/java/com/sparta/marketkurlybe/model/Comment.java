@@ -34,6 +34,9 @@ public class Comment extends Timestamped{
     @Column
     private Integer helpCnt = 0;
 
+    @Column
+    private Boolean likeCheck;
+
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
     private Item item;

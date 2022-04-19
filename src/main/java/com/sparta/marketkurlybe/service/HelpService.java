@@ -20,6 +20,7 @@ import java.util.Optional;
 public class HelpService {
     private final HelpRepository helpRepository;
     private final CommentRepository commentRepository;
+    private final ItemService itemService;
 
     @Transactional
     public Boolean help(Long commentId, String userId) {
