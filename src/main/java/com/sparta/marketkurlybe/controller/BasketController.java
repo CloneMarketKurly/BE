@@ -18,9 +18,9 @@ public class BasketController {
     private final BasketService basketService;
 
     //유저정보는 장바구니에서 넣을 예정
-    @PostMapping("/basketlist")
-    public void createBuyList(@RequestBody BuyItemListDto itemListDto){
-        basketService.createBuyList(itemListDto);
+    @PostMapping("/basketList")
+    public void createBuyList(@RequestBody BuyItemListDto itemListDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        basketService.createBuyList(itemListDto, userDetails);
     }
 
 
