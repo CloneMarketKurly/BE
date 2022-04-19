@@ -27,10 +27,22 @@ public class BasketController {
         return basketService.basketList(userDetails);
     }
 
-    //장바구니 삭제
-    @DeleteMapping("/basketList/{basketId}")
-    public void deleteBasket(@PathVariable Long basketId){
-        basketService.deleteBasket(basketId);
+//    //장바구니 전체 삭제
+//    @DeleteMapping("/basketList/{basketId}/all")
+//    public void allDeleteBasket(@PathVariable Long basketId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+//        basketService.allDeleteBasket(basketId, userDetails);
+//    }
+
+    //장바구니 선택 삭제
+    @DeleteMapping("/basketList/{buyItemListId}")
+    public void deleteBasket(@PathVariable Long buyItemListId) {
+        basketService.deleteBasket(buyItemListId);
+    }
+
+    //선택 상품 수정
+    @PutMapping("/basketList/{buyItemListId}")
+    public void editBasket(@PathVariable Long buyItemListId){
+
     }
 
 }
