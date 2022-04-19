@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -33,6 +34,10 @@ public class Comment extends Timestamped{
 
     @Column
     private Integer helpCnt = 0;
+
+    @Column
+    @ColumnDefault("false")
+    private Boolean likeCheck = false;
 
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
