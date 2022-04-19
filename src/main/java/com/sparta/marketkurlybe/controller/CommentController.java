@@ -20,30 +20,30 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-@Slf4j
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/item/details")
 @RestController
-@Lazy
 public class CommentController {
+
 
     private final CommentService commentService;
     private final CommentRepository commentRepository;
     private final S3Uploader s3Uploader;
 
 
-    @PostMapping("/{itemId}/comments")
-    public Long newComment (@PathVariable Long itemId, @RequestBody CommentDto commentDto) {
-            Comment comment = commentService.commentIn(itemId, commentDto);
-            return comment.getCommentId();
-    }
+//    @PostMapping("/{itemId}/comments")
+//    public Long newComment (@PathVariable Long itemId, @RequestBody CommentDto commentDto) {
+//            Comment comment = commentService.commentIn(itemId, commentDto);
+//            return comment.getCommentId();
+//    }
 
 
     @PostMapping("/{itemId}/comments")
     public Long newComment11 (@PathVariable Long itemId, @RequestPart CommentDto commentDto,
                               @RequestPart MultipartFile imgFile) throws IOException {
         //업로드
-        String img = s3Uploader.upload(imgFile);
+        String img = s3Uploader.upload(commentDto, imgFile);
         commentDto.setImage(img);
         Comment comment = commentService.commentIn(itemId, commentDto);
         return comment.getCommentId();
