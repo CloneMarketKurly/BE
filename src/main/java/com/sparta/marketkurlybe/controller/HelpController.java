@@ -2,27 +2,30 @@ package com.sparta.marketkurlybe.controller;
 
 
 import com.sparta.marketkurlybe.dto.BoardDto;
+import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.HelpService;
 import com.sparta.marketkurlybe.validator.ErrorResult;
+import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
 public class HelpController {
     private final HelpService helpService;
 
-    @PostMapping("/item/details/{commentId}/help")
-    public Boolean help(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    @PostMapping("/item/details/{itemId}/{commentId}/help")
+    public Map<String, Object> help(@PathVariable Long itemId, @PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(userDetails == null){
-            return false;
+            return Collections.emptyMap();
         }
-        return helpService.help(commentId, userDetails.getUsername());
+        return helpService.help(commentId, itemId, userDetails.getUsername());
     }
 
     @PostMapping("/item/details/{detailId}/board")

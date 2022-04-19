@@ -1,6 +1,7 @@
 package com.sparta.marketkurlybe.service;
 
 import com.sparta.marketkurlybe.dto.BoardDto;
+import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.model.Comment;
 import com.sparta.marketkurlybe.model.Help;
 import com.sparta.marketkurlybe.repository.CommentRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class HelpService {
     private final ItemService itemService;
 
     @Transactional
-    public Boolean help(Long commentId, String userId) {
+    public Map<String, Object> help(Long commentId, Long itemId, String userId) {
         Optional<Help> helpState = helpRepository.findByCommentIdAndUserId(commentId, userId);
 
         Comment comment = commentRepository.findById(commentId).orElseThrow(
@@ -34,13 +36,16 @@ public class HelpService {
             Help help = new Help(commentId, userId);
             helpRepository.save(help);
             comment.setHelpCnt(comment.getHelpCnt()+1);
-            return true;
+            comment.setLikeCheck(true);
+            return itemService.getItemDetails(itemId);
         }
 
         helpRepository.deleteByCommentIdAndUserId(commentId, userId);
         comment.setHelpCnt(comment.getHelpCnt()-1);
-        return false;
+        comment.setLikeCheck(false);
+        return itemService.getItemDetails(itemId);
     }
+
 
     public ErrorResult createBoard(Long detailId, List<MultipartFile> files, String comment, UserDetailsImpl userDetails) {
         return null;
