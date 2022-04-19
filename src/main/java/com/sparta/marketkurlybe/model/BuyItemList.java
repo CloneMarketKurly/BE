@@ -1,9 +1,6 @@
 package com.sparta.marketkurlybe.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +8,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 @Entity
 //구매목록
 public class BuyItemList extends Timestamped{

@@ -1,6 +1,7 @@
 package com.sparta.marketkurlybe.controller;
 
 import com.sparta.marketkurlybe.dto.BuyItemListDto;
+import com.sparta.marketkurlybe.dto.BuyListResponseDto;
 import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.BasketService;
@@ -41,7 +42,8 @@ public class BasketController {
 
     //선택 상품 수정
     @PutMapping("/basketList/{buyItemListId}")
-    public void editBasket(@PathVariable Long buyItemListId){
+    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListResponseDto responseDto){
+        basketService.updateBasket(buyItemListId, responseDto);
 
     }
 
