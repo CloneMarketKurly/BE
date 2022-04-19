@@ -83,14 +83,27 @@ public class BasketService {
         return basket;
     }
 
+//    //장바구니 전체 삭제
+//    @Transactional
+//    public void allDeleteBasket(Long basketId, UserDetailsImpl userDetails) {
+//        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
+//                () -> new NullPointerException("회원 정보가 존재하지 않습니다.")
+//        );
+//
+//        Basket basket = basketRepository.findById(basketId).orElseThrow(
+//                () -> new NullPointerException("장바구니가 존재하지 않습니다.")
+//        );
+//
+//        basketRepository.delete(basket);
+//
+//    }
 
+    //장바구니 선택 삭제
     @Transactional
-    public void deleteBasket(Long basketId) {
-        Basket basket = basketRepository.findById(basketId).orElseThrow(
-                () -> new NullPointerException("장바구니가 존재하지 않습니다.")
+    public void deleteBasket(Long buyItemListId) {
+        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
+                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
         );
-
-        basketRepository.delete(basket);
-
+        buyItemListRepository.delete(buyItemList);
     }
 }
