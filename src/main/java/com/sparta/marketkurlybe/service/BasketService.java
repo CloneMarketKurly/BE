@@ -84,10 +84,13 @@ public class BasketService {
     }
 
 
-//    @Transactional
-//    public void deleteBasket(Long basketId, UserDetailsImpl userDetails) {
-//        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
-//                ()-> new NullPointerException("회원정보가 존재하지 않습니다.")
-//        );
-//    }
+    @Transactional
+    public void deleteBasket(Long basketId) {
+        Basket basket = basketRepository.findById(basketId).orElseThrow(
+                () -> new NullPointerException("장바구니가 존재하지 않습니다.")
+        );
+
+        basketRepository.delete(basket);
+
+    }
 }
