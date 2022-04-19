@@ -38,4 +38,5 @@ public class CommentDto {
         this.setImage(comment.getImage());
         this.setLikeCheck(comment.getLikeCheck());
     }
+
 }
