@@ -27,9 +27,10 @@ public class BasketController {
         return basketService.basketList(userDetails);
     }
 
-//    @DeleteMapping("/basketList/{basketId}")
-//    public void deleteBasket(@PathVariable Long basketId,@AuthenticationPrincipal UserDetailsImpl userDetails){
-//        basketService.deleteBasket(basketId ,userDetails);
-//    }
+    //장바구니 삭제
+    @DeleteMapping("/basketList/{basketId}")
+    public void deleteBasket(@PathVariable Long basketId){
+        basketService.deleteBasket(basketId);
+    }
 
 }
