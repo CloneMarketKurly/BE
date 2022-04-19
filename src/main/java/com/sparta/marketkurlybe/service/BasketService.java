@@ -1,6 +1,7 @@
 package com.sparta.marketkurlybe.service;
 
 import com.sparta.marketkurlybe.dto.BuyItemListDto;
+import com.sparta.marketkurlybe.dto.BuyListResponseDto;
 import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.model.BuyItemList;
 import com.sparta.marketkurlybe.model.Item;
@@ -83,11 +84,36 @@ public class BasketService {
         return basket;
     }
 
-
+//    //장바구니 전체 삭제
 //    @Transactional
-//    public void deleteBasket(Long basketId, UserDetailsImpl userDetails) {
+//    public void allDeleteBasket(Long basketId, UserDetailsImpl userDetails) {
 //        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
-//                ()-> new NullPointerException("회원정보가 존재하지 않습니다.")
+//                () -> new NullPointerException("회원 정보가 존재하지 않습니다.")
 //        );
+//
+//        Basket basket = basketRepository.findById(basketId).orElseThrow(
+//                () -> new NullPointerException("장바구니가 존재하지 않습니다.")
+//        );
+//
+//        basketRepository.delete(basket);
+//
 //    }
+
+    //장바구니 선택 삭제
+    @Transactional
+    public void deleteBasket(Long buyItemListId) {
+        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
+                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
+        );
+        buyItemListRepository.delete(buyItemList);
+    }
+
+    //장바구니 수정(선택 수량 변경)
+    @Transactional
+    public void updateBasket(Long buyItemListId, BuyListResponseDto responseDto) {
+        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
+                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
+        );
+        buyItemList.setCount(responseDto.getCount());
+    }
 }
