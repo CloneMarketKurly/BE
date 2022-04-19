@@ -1,9 +1,12 @@
 package com.sparta.marketkurlybe.service;
 
+import com.sparta.marketkurlybe.dto.BoardDto;
 import com.sparta.marketkurlybe.model.Comment;
 import com.sparta.marketkurlybe.model.Help;
 import com.sparta.marketkurlybe.repository.CommentRepository;
 import com.sparta.marketkurlybe.repository.HelpRepository;
+import com.sparta.marketkurlybe.security.UserDetailsImpl;
+import com.sparta.marketkurlybe.validator.ErrorResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,4 +39,7 @@ public class HelpService {
         return false;
     }
 
+    public ErrorResult createBoard(Long detailId, BoardDto bordDto, UserDetailsImpl userDetails) {
+        return null;
+    }
 }
