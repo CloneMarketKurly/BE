@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class BuyItemListDto {
-    private Long ItemId;
+    private Long itemId;
     private int count;
 }

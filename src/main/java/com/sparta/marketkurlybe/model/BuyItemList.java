@@ -21,10 +21,15 @@ public class BuyItemList extends Timestamped{
     private Long buyItemListId;
 
     @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @OneToOne
     @JoinColumn(name = "itemId")
     private Item item;
 
     @Column(nullable = false)
     private int count;
+
 
 }
