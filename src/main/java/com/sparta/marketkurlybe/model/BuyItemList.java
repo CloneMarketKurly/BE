@@ -31,4 +31,5 @@ public class BuyItemList extends Timestamped{
     @Column(nullable = false)
     private int count;
 
+
 }
