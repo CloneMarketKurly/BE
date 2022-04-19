@@ -7,5 +7,7 @@ public class BoardDto {
     private String userId;
     private Long itemId;
     private String comment;
-    private String image;
+    private String imageName;
+    private String imagePath;
+    private Long imageSize;
 }

@@ -3,6 +3,9 @@ package com.sparta.marketkurlybe.security.filter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.marketkurlybe.model.User;
+import com.sparta.marketkurlybe.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,10 +14,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 // todo: 폼 로그인 요청 시 유저 아이디와 패스워드를 가지고 인증을 진행한다.
 public class FormLoginFilter extends UsernamePasswordAuthenticationFilter {
-
     private final ObjectMapper objectMapper;
 
     public FormLoginFilter(final AuthenticationManager authenticationManager) {

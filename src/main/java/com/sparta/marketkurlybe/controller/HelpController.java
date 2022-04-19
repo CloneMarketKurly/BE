@@ -7,10 +7,10 @@ import com.sparta.marketkurlybe.service.HelpService;
 import com.sparta.marketkurlybe.validator.ErrorResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,10 +26,14 @@ public class HelpController {
     }
 
     @PostMapping("/item/details/{detailId}/board")
-    public ErrorResult createBoard(@PathVariable Long detailId, @RequestBody BoardDto bordDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ErrorResult createBoard(
+            @PathVariable Long detailId,
+            @RequestParam("files") List<MultipartFile> files,
+            @RequestParam("comment") String comment,
+            @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(userDetails == null){
             return new ErrorResult(false, "로그인한 사용자가 없습니다.");
         }
-        return helpService.createBoard(detailId, bordDto, userDetails);
+        return helpService.createBoard(detailId, files, comment, userDetails);
     }
 }

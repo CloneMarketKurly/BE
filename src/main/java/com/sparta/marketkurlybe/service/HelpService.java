@@ -9,8 +9,10 @@ import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.validator.ErrorResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -39,7 +41,7 @@ public class HelpService {
         return false;
     }
 
-    public ErrorResult createBoard(Long detailId, BoardDto bordDto, UserDetailsImpl userDetails) {
+    public ErrorResult createBoard(Long detailId, List<MultipartFile> files, String comment, UserDetailsImpl userDetails) {
         return null;
     }
 }
