@@ -44,7 +44,13 @@ public class BasketController {
     @PutMapping("/basketList/{buyItemListId}")
     public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListResponseDto responseDto){
         basketService.updateBasket(buyItemListId, responseDto);
-
     }
+
+    //최종 주문 완료
+    @PostMapping("/basketList/{basketId}")
+    public void createOrders(@PathVariable Long basketId){
+        basketService.createOrders(basketId);
+    }
+
 
 }
