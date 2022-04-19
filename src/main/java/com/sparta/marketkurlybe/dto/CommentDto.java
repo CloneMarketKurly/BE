@@ -18,19 +18,20 @@ public class CommentDto {
 
     private String title;
 
-    private String modifiedAt;
-
-    private Integer helpCnt;
-//    private String image;
+//    private String modifiedAt;
 //
-//    private int help;
+//    private Integer helpCnt;
+
+    private String image;
+
 
     public CommentDto (Comment comment){
         this.setUserId(comment.getUserId());
         this.setTitle(comment.getTitle());
         this.setComment(comment.getComment());
         this.setCommentId(comment.getCommentId());
-        this.setModifiedAt(comment.getModifiedAt());
-        this.setHelpCnt(comment.getHelpCnt());
+//        this.setModifiedAt(comment.getModifiedAt());
+//        this.setHelpCnt(comment.getHelpCnt());
+        this.setImage(comment.getImage());
     }
 }
