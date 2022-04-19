@@ -2,6 +2,7 @@ package com.sparta.marketkurlybe.controller;
 
 
 import com.sparta.marketkurlybe.dto.BoardDto;
+import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.HelpService;
 import com.sparta.marketkurlybe.validator.ErrorResult;
@@ -18,11 +19,11 @@ public class HelpController {
     private final HelpService helpService;
 
     @PostMapping("/item/details/{commentId}/help")
-    public Boolean help(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public CommentDto help(@PathVariable Long commentId, @RequestBody Long itemId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(userDetails == null){
-            return false;
+            return null;
         }
-        return helpService.help(commentId, userDetails.getUsername());
+        return helpService.help(commentId, itemId, userDetails.getUsername());
     }
 
     @PostMapping("/item/details/{detailId}/board")

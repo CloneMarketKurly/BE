@@ -43,6 +43,4 @@ public class Comment extends Timestamped{
         this.setComment(dto.getComment());
         this.setTitle(dto.getTitle());
     }
-
-
 }
