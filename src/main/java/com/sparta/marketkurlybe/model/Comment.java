@@ -28,8 +28,8 @@ public class Comment extends Timestamped{
     @Column
     private String title;
 
-    //    @Column
-//    private String image;
+    @Column
+    private String image;
 
     @Column
     private Integer helpCnt = 0;
