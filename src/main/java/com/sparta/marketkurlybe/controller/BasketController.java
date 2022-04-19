@@ -1,14 +1,12 @@
 package com.sparta.marketkurlybe.controller;
 
 import com.sparta.marketkurlybe.dto.BuyItemListDto;
+import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/item")
@@ -23,5 +21,15 @@ public class BasketController {
         basketService.createBuyList(itemListDto, userDetails);
     }
 
+    //결제 전 장바구니
+    @GetMapping("/basketList")
+    public Basket basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return basketService.basketList(userDetails);
+    }
+
+//    @DeleteMapping("/basketList/{basketId}")
+//    public void deleteBasket(@PathVariable Long basketId,@AuthenticationPrincipal UserDetailsImpl userDetails){
+//        basketService.deleteBasket(basketId ,userDetails);
+//    }
 
 }
