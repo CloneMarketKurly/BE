@@ -1,6 +1,7 @@
 package com.sparta.marketkurlybe.service;
 
 import com.sparta.marketkurlybe.dto.JoinDto;
+import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.model.User;
 import com.sparta.marketkurlybe.repository.UserRepository;
 import com.sparta.marketkurlybe.validator.ErrorResult;
