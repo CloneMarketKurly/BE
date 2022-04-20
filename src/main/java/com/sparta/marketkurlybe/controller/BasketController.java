@@ -22,37 +22,24 @@ public class BasketController {
         basketService.createBuyList(itemListDto, userDetails);
     }
 
-    //결제 전 장바구니
-//    @GetMapping("/basketList")
-//    public Basket basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
-//        return basketService.basketList(userDetails);
-//    }
-
-    //결제 전 장바구니 조회
+    //결제 전 장바구니 조회 + 장바구니 저장 + 장바구니 수정
     @GetMapping("/basketList")
     public Basket basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
         return basketService.basketList(userDetails);
     }
-//
-////    //굳이 필요한가...?
-////    //결제 전 장바구니 저장
-//    @PostMapping("/baskets")
-//    public void createBasket(@AuthenticationPrincipal UserDetailsImpl userDetails){
-//        basketService.createBasket(userDetails);
-//    }
-//
+
 //    //장바구니 선택 삭제
 //    @DeleteMapping("/basketList/{buyItemListId}")
 //    public void deleteBasket(@PathVariable Long buyItemListId) {
 //        basketService.deleteBasket(buyItemListId);
 //    }
 //
-//    //장바구니 전체 삭제
-//    @DeleteMapping("/basketList/all/{buyItemListId}")
-//    public void deleteBasket2(@PathVariable Long buyItemListId) {
-//        basketService.deleteBasket(buyItemListId);
-//    }
-//
+    //장바구니 전체 삭제(개발자용)
+    @DeleteMapping("/basketList/all/{buyItemListId}")
+    public void deleteBasket2(@PathVariable Long buyItemListId) {
+        basketService.allDeleteBasket(buyItemListId);
+    }
+
 //    //선택 상품 수정
 //    @PutMapping("/basketList/{buyItemListId}")
 //    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListResponseDto responseDto){

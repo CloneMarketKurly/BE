@@ -12,12 +12,7 @@ import javax.persistence.*;
 public class Item extends Timestamped{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "itemId")
     private Long id;
-
-//    @OneToOne
-//    @JoinColumn(name = "buyItemListId")
-//    private BuyItemList buyItemList;
 
     @Column(nullable = false)
     private String title;

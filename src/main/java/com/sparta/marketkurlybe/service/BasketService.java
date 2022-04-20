@@ -13,6 +13,7 @@ import com.sparta.marketkurlybe.repository.UserRepository;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class BasketService {
         buyItemListRepository.save(buyItemList);
     }
 
-//    //결제전 장바구니 조회
+    //결제전 장바구니 조회 + 징바구니 저장 + 수정
     @Transactional
     public Basket basketList(UserDetailsImpl userDetails) {
         User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
@@ -74,73 +75,37 @@ public class BasketService {
 
 
         Basket basket = Basket.builder()
+                .user(user)
                 .buyItemList(buyItemList)
                 .sumPrice(sumPrice)
                 .deliverFee(deliverFee)
                 .totalPrice(totalPrice)
                 .build();
 
+        Basket findId = basketRepository.findByUser_Id(user.getId());
+
+        //해당 유저의 장바구니 정보가 없다면, save
+        //있다면 update
+        if (findId == null){
+            basketRepository.save(basket);
+        }else {
+            basket.setBuyItemList(basket.getBuyItemList());
+            basket.setDeliverFee(basket.getDeliverFee());
+            basket.setSumPrice(basket.getSumPrice());
+            basket.setTotalPrice(basket.getTotalPrice());
+        }
         return basket;
     }
 
-    //결제 전 장바구니 조회
-//    @Transactional
-//    public Basket basketList(UserDetailsImpl userDetails) {
-//        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
-//                () -> new NullPointerException("회원정보가 존재하지 않습니다.")
-//        );
-//
-//        Basket basket = basketRepository.findByUser_Id(user.getId());
-//
-//        return basket;
-//    }
+    //장바구니 전체 삭제(개발자용)
+    @Transactional
+    public void allDeleteBasket(Long basketId) {
+        Basket basket = basketRepository.findById(basketId).orElseThrow(
+                () -> new NullPointerException("장바구니가 존재하지 않습니다.")
+        );
+        basketRepository.delete(basket);
 
-//    //결제전 장바구니 저장
-//    @Transactional
-//    public void createBasket(UserDetailsImpl userDetails) {
-//        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
-//                () -> new NullPointerException("회원정보가 존재하지 않습니다.")
-//        );
-//
-//       List<BuyItemList> buyItemList = buyItemListRepository.findByUser_Id(user.getId());
-//
-//        int sumPrice = 0;
-//        int deliverFee = 0;
-//
-//       for (BuyItemList list : buyItemList){
-//           sumPrice += list.getItem().getPrice() * list.getCount();
-//       }
-//
-//        if (sumPrice < 40000){
-//            deliverFee += 3000;
-//        }
-//
-//        int totalPrice = sumPrice + deliverFee;
-//
-//       Basket basket = Basket.builder()
-//               .buyItemList(buyItemList)
-//               .sumPrice(sumPrice)
-//               .deliverFee(deliverFee)
-//               .totalPrice(totalPrice)
-//               .build();
-//
-//        basketRepository.save(basket);
-//    }
-
-//    //장바구니 전체 삭제
-//    @Transactional
-//    public void allDeleteBasket(Long basketId, UserDetailsImpl userDetails) {
-//        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
-//                () -> new NullPointerException("회원 정보가 존재하지 않습니다.")
-//        );
-//
-//        Basket basket = basketRepository.findById(basketId).orElseThrow(
-//                () -> new NullPointerException("장바구니가 존재하지 않습니다.")
-//        );
-//
-//        basketRepository.delete(basket);
-//
-//    }
+    }
 
     //장바구니 선택 삭제
 //    @Transactional
