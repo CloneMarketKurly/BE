@@ -2,16 +2,12 @@ package com.sparta.marketkurlybe.service;
 
 import com.sparta.marketkurlybe.dto.BuyItemListDto;
 import com.sparta.marketkurlybe.dto.BuyListPutDto;
-import com.sparta.marketkurlybe.model.Basket;
-import com.sparta.marketkurlybe.model.BuyItemList;
-import com.sparta.marketkurlybe.model.Item;
-import com.sparta.marketkurlybe.model.User;
-import com.sparta.marketkurlybe.repository.BasketRepository;
-import com.sparta.marketkurlybe.repository.BuyItemListRepository;
-import com.sparta.marketkurlybe.repository.ItemRepository;
-import com.sparta.marketkurlybe.repository.UserRepository;
+import com.sparta.marketkurlybe.dto.OrdersRequestDto;
+import com.sparta.marketkurlybe.model.*;
+import com.sparta.marketkurlybe.repository.*;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,6 +21,7 @@ public class BasketService {
     private final ItemRepository itemRepository;
     private final BuyItemListRepository buyItemListRepository;
     private final BasketRepository basketRepository;
+    private final OrdersRepository ordersRepository;
 
     //구매목록 저장
     @Transactional
@@ -126,5 +123,32 @@ public class BasketService {
                 () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
         );
         buyItemList.setCount(responseDto.getCount());
+    }
+
+    //최종 결제 완료 주문
+    @Transactional
+    public void createOrders(OrdersRequestDto requestDto, UserDetailsImpl userDetails) {
+        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
+                () -> new NullPointerException("회원정보가 존재하지 않습니다.")
+        );
+        Basket basket = basketRepository.findByUser_Id(user.getId());
+
+        Orders orders = Orders.builder()
+                .basket(basket)
+                .address(requestDto.getAddress())
+                .build();
+
+        ordersRepository.save(orders);
+    }
+
+    //결제완료 주문서 보기
+    public Orders getOrders(UserDetailsImpl userDetails) {
+        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
+                () -> new NullPointerException("회원정보가 존재하지 않습니다.")
+        );
+        Basket basket = basketRepository.findByUser_Id(user.getId());
+        Orders orders = ordersRepository.findByBasketBasketId(basket.getBasketId());
+
+        return orders;
     }
 }
