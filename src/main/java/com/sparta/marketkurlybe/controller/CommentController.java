@@ -66,7 +66,7 @@ public class CommentController {
                                                @RequestPart(value = "comment") CommentDto commentDto,
                                                @RequestPart(value = "image", required = false) MultipartFile imgFile,
                                                @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
-        if (imgFile != null) {
+        if(imgFile != null) {
             commentService.fileupdateComment(commentId, commentDto,userDetails.getUsername(), imgFile);
             return ResponseEntity.ok("후기 수정 완료!");
         } else {
