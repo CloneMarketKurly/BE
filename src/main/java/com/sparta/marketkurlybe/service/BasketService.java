@@ -1,7 +1,7 @@
 package com.sparta.marketkurlybe.service;
 
 import com.sparta.marketkurlybe.dto.BuyItemListDto;
-import com.sparta.marketkurlybe.dto.BuyListResponseDto;
+import com.sparta.marketkurlybe.dto.BuyListPutDto;
 import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.model.BuyItemList;
 import com.sparta.marketkurlybe.model.Item;
@@ -13,10 +13,8 @@ import com.sparta.marketkurlybe.repository.UserRepository;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -107,21 +105,21 @@ public class BasketService {
 
     }
 
-    //장바구니 선택 삭제
-//    @Transactional
-//    public void deleteBasket(Long buyItemListId) {
-//        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
-//                () -> new NullPointerException("상품이 존재하지 않습니다.")
-//        );
-//        buyItemListRepository.delete(buyItemList);
-//    }
-//
-//    //장바구니 수정(선택 수량 변경)
-//    @Transactional
-//    public void updateBasket(Long buyItemListId, BuyListResponseDto responseDto) {
-//        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
-//                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
-//        );
-//        buyItemList.setCount(responseDto.getCount());
-//    }
+//    장바구니 선택 삭제
+    @Transactional
+    public void deleteBasket(Long buyItemListId) {
+        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
+                () -> new NullPointerException("상품이 존재하지 않습니다.")
+        );
+        buyItemListRepository.delete(buyItemList);
+    }
+
+    //장바구니 수정(선택 수량 변경)
+    @Transactional
+    public void updateBasket(Long buyItemListId, BuyListPutDto responseDto) {
+        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
+                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
+        );
+        buyItemList.setCount(responseDto.getCount());
+    }
 }
