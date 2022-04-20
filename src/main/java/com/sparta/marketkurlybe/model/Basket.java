@@ -17,7 +17,6 @@ public class Basket extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long basketId;
 
     @OneToMany
