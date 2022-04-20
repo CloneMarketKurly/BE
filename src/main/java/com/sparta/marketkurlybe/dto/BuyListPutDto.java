@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BuyListResponseDto {
-
+public class BuyListPutDto {
     private int count;
 }
