@@ -50,6 +50,8 @@ public class BasketService {
     //결제전 장바구니 조회 + 징바구니 저장 + 수정
     @Transactional
     public Basket basketList(UserDetailsImpl userDetails) {
+
+        //ToDo : Method GET
         User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
                 () -> new NullPointerException("회원정보가 존재하지 않습니다.")
         );
@@ -82,11 +84,14 @@ public class BasketService {
 
         Basket findId = basketRepository.findByUser_Id(user.getId());
 
+
+        //ToDo : Method POST
         //해당 유저의 장바구니 정보가 없다면, save
         //있다면 update
         if (findId == null){
             basketRepository.save(basket);
         }else {
+            //ToDo : Method PUT
             basket.setBuyItemList(basket.getBuyItemList());
             basket.setDeliverFee(basket.getDeliverFee());
             basket.setSumPrice(basket.getSumPrice());
@@ -105,7 +110,7 @@ public class BasketService {
 
     }
 
-//    장바구니 선택 삭제
+    // 장바구니 선택 삭제
     @Transactional
     public void deleteBasket(Long buyItemListId) {
         BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
