@@ -16,6 +16,19 @@
 - 2022년 4월 15일 ~ 2022년 4월 21일
 - 배포 : 2022년 4월 21일
 
+## 👥 팀 소개
+#### `Backend`
+<a href="https://github.com/ksanacloud" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=이현재 &color=08CE5D&style=for-the-badge&>"/></a>
+<a href="https://github.com/EunheaSong" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=송은혜 &color=08CE5D&style=for-the-badge&>"/></a>
+<a href="https://github.com/hyun-woong" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=심현웅 &color=08CE5D&style=for-the-badge&>"/></a>
+
+#### `Frontend`
+ <a href="https://github.com/JIEUN24" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=React&message=최지은 &color=61dafb&style=for-the-badge&>"/></a>
+ <a href="https://github.com/GYMMX" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=React&message=김가경 &color=61dafb&style=for-the-badge&>"/></a>
+
+
+**[(Front-end github)]()**
+
 ## 📜 기술스택
 |분류|기술|
 | :-: |:- |
