@@ -11,11 +11,9 @@ import javax.persistence.*;
 @Setter
 @Entity
 //구매목록
-public class BuyItemList extends Timestamped{
-
+public class BuyItemList extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long buyItemListId;
 
     @OneToOne
@@ -28,6 +26,5 @@ public class BuyItemList extends Timestamped{
 
     @Column(nullable = false)
     private int count;
-
 
 }

@@ -16,35 +16,48 @@ public class BasketController {
 
     private final BasketService basketService;
 
-    //유저정보는 장바구니에서 넣을 예정
+    //구매목록 저장
     @PostMapping("/basketList")
     public void createBuyList(@RequestBody BuyItemListDto itemListDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         basketService.createBuyList(itemListDto, userDetails);
     }
 
     //결제 전 장바구니
+//    @GetMapping("/basketList")
+//    public Basket basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
+//        return basketService.basketList(userDetails);
+//    }
+
+    //결제 전 장바구니 조회
     @GetMapping("/basketList")
     public Basket basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
         return basketService.basketList(userDetails);
     }
-
-//    //장바구니 전체 삭제
-//    @DeleteMapping("/basketList/{basketId}/all")
-//    public void allDeleteBasket(@PathVariable Long basketId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-//        basketService.allDeleteBasket(basketId, userDetails);
+//
+////    //굳이 필요한가...?
+////    //결제 전 장바구니 저장
+//    @PostMapping("/baskets")
+//    public void createBasket(@AuthenticationPrincipal UserDetailsImpl userDetails){
+//        basketService.createBasket(userDetails);
 //    }
-
-    //장바구니 선택 삭제
-    @DeleteMapping("/basketList/{buyItemListId}")
-    public void deleteBasket(@PathVariable Long buyItemListId) {
-        basketService.deleteBasket(buyItemListId);
-    }
-
-    //선택 상품 수정
-    @PutMapping("/basketList/{buyItemListId}")
-    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListResponseDto responseDto){
-        basketService.updateBasket(buyItemListId, responseDto);
-
-    }
+//
+//    //장바구니 선택 삭제
+//    @DeleteMapping("/basketList/{buyItemListId}")
+//    public void deleteBasket(@PathVariable Long buyItemListId) {
+//        basketService.deleteBasket(buyItemListId);
+//    }
+//
+//    //장바구니 전체 삭제
+//    @DeleteMapping("/basketList/all/{buyItemListId}")
+//    public void deleteBasket2(@PathVariable Long buyItemListId) {
+//        basketService.deleteBasket(buyItemListId);
+//    }
+//
+//    //선택 상품 수정
+//    @PutMapping("/basketList/{buyItemListId}")
+//    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListResponseDto responseDto){
+//        basketService.updateBasket(buyItemListId, responseDto);
+//
+//    }
 
 }
