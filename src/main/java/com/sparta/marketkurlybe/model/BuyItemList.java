@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-//구매목록
 public class BuyItemList extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

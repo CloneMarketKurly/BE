@@ -1,9 +1,6 @@
 package com.sparta.marketkurlybe.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Setter
 @Getter
 @Builder
 public class Basket extends Timestamped {
@@ -18,6 +16,10 @@ public class Basket extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long basketId;
+
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
     @OneToMany
     private List<BuyItemList> buyItemList;
