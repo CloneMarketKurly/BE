@@ -30,6 +30,9 @@ public class Comment extends Timestamped{
     private String image;
 
     @Column
+    private String imageName;
+
+    @Column
     private Integer helpCnt = 0;
 
     @Column

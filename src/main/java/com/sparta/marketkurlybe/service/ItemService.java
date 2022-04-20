@@ -1,5 +1,6 @@
 package com.sparta.marketkurlybe.service;
 
+import com.sparta.marketkurlybe.dto.ComResponseDto;
 import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.model.Comment;
 import com.sparta.marketkurlybe.model.Help;
@@ -42,11 +43,11 @@ public class ItemService {
         );
 
         List<Comment> commentList = commentRepository.findByItem_Id(itemId);
-        List<CommentDto> commentDtos = new ArrayList<>();
+        List<ComResponseDto> ComResponseDto = new ArrayList<>();
 
         for (Comment comment : commentList){
-            CommentDto commentDto = new CommentDto(comment);
-            commentDtos.add(commentDto);
+            ComResponseDto commentDto = new ComResponseDto(comment);
+            ComResponseDto.add(commentDto);
         }
 
         Map<String, Object> ItemDetailsList = new HashMap<>();
@@ -58,7 +59,7 @@ public class ItemService {
         ItemDetailsList.put("delivery",items.getPacking());
         ItemDetailsList.put("promise",items.getPromise());
         ItemDetailsList.put("price",items.getPrice());
-        ItemDetailsList.put("comments", commentDtos);
+        ItemDetailsList.put("comments", ComResponseDto);
 
         System.out.println("리스트 : " + ItemDetailsList);
 
