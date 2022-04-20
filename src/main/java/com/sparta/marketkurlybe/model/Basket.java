@@ -19,9 +19,8 @@ public class Basket extends Timestamped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long basketId;
 
-//    @OneToMany
-//    @JoinColumn(name = "buyListId")
-//    private List<BuyItemList> buyItemList;
+    @OneToMany
+    private List<BuyItemList> buyItemList;
 
     @Column
     private int deliverFee;

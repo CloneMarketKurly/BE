@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Builder
 public class Item extends Timestamped{
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "itemId")
     private Long id;
 
 //    @OneToOne
