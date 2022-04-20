@@ -38,8 +38,8 @@ public class BasketController {
 
     //선택 상품 수정
     @PutMapping("/basketList/{buyItemListId}")
-    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListPutDto responseDto){
-        basketService.updateBasket(buyItemListId, responseDto);
+    public Basket updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListPutDto responseDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return basketService.updateBasket(buyItemListId, responseDto, userDetails);
     }
 
     //결제완료 주문서 저장
