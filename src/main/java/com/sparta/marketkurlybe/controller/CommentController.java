@@ -10,12 +10,15 @@ import com.sparta.marketkurlybe.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -25,7 +28,6 @@ public class CommentController {
 
 
     private final CommentService commentService;
-    private final CommentRepository commentRepository;
     private final S3Uploader s3Uploader;
 
 
@@ -37,13 +39,25 @@ public class CommentController {
 
 
     @PostMapping("/{itemId}/comments")
-    public Long newComment11 (@PathVariable Long itemId, @RequestPart(value = "hello") CommentDto commentDto,
+    public ResponseEntity newComment(@PathVariable Long itemId,
+                              @RequestPart(value = "comment") CommentDto commentDto,
                               @RequestPart(value = "image", required = false) MultipartFile imgFile) throws IOException {
         //업로드
-        System.out.println(itemId);
-        String img = s3Uploader.upload(commentDto, imgFile);
-        Comment comment = commentService.commentIn(itemId, commentDto,img);
-        return comment.getCommentId();
+        if (imgFile != null) {
+
+            String img = s3Uploader.upload(imgFile);
+            Comment comment = commentService.commentIn(itemId, commentDto,img);
+
+            Map<String, String> com = new HashMap<>();
+            com.put("commentID", comment.getCommentId().toString());
+            com.put("image", comment.getImage());
+
+            return new ResponseEntity(com, HttpStatus.OK);
+        } else {
+            Comment comment = commentService.commentIn(itemId, commentDto);
+            return new ResponseEntity(comment.getCommentId(), HttpStatus.OK);
+        }
+
     }
 
 
@@ -63,8 +77,5 @@ public class CommentController {
         commentService.deleteComment(commentId, userDetails.getUsername());
         return ResponseEntity.ok("후기 삭제 완료!");
     }
-
-
-
 
 }

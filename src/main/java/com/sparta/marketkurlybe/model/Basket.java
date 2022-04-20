@@ -17,12 +17,11 @@ public class Basket extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long basketId;
 
-    @OneToMany
-    @JoinColumn(name = "buyListId")
-    private List<BuyItemList> buyItemList;
+//    @OneToMany
+//    @JoinColumn(name = "buyListId")
+//    private List<BuyItemList> buyItemList;
 
     @Column
     private int deliverFee;
