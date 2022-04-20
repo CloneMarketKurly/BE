@@ -1,7 +1,7 @@
 package com.sparta.marketkurlybe.controller;
 
 import com.sparta.marketkurlybe.dto.BuyItemListDto;
-import com.sparta.marketkurlybe.dto.BuyListResponseDto;
+import com.sparta.marketkurlybe.dto.BuyListPutDto;
 import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.BasketService;
@@ -28,23 +28,22 @@ public class BasketController {
         return basketService.basketList(userDetails);
     }
 
-//    //장바구니 선택 삭제
-//    @DeleteMapping("/basketList/{buyItemListId}")
-//    public void deleteBasket(@PathVariable Long buyItemListId) {
-//        basketService.deleteBasket(buyItemListId);
-//    }
-//
+    //장바구니 선택 삭제(삭제하면, 자동으로 장바구니 조회에 삭제된 정보 반영 됨)
+    @DeleteMapping("/basketList/{buyItemListId}")
+    public void deleteBasket(@PathVariable Long buyItemListId) {
+        basketService.deleteBasket(buyItemListId);
+    }
+
+    //선택 상품 수정
+    @PutMapping("/basketList/{buyItemListId}")
+    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListPutDto responseDto){
+        basketService.updateBasket(buyItemListId, responseDto);
+    }
+
     //장바구니 전체 삭제(개발자용)
     @DeleteMapping("/basketList/all/{buyItemListId}")
     public void deleteBasket2(@PathVariable Long buyItemListId) {
         basketService.allDeleteBasket(buyItemListId);
     }
-
-//    //선택 상품 수정
-//    @PutMapping("/basketList/{buyItemListId}")
-//    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListResponseDto responseDto){
-//        basketService.updateBasket(buyItemListId, responseDto);
-//
-//    }
 
 }
