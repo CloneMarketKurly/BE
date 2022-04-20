@@ -5,7 +5,6 @@ import com.sparta.marketkurlybe.dto.BuyListPutDto;
 import com.sparta.marketkurlybe.dto.OrdersRequestDto;
 import com.sparta.marketkurlybe.model.Basket;
 import com.sparta.marketkurlybe.model.Orders;
-import com.sparta.marketkurlybe.model.User;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.BasketService;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,6 @@
 package com.sparta.marketkurlybe.controller;
 
 
-import com.sparta.marketkurlybe.dto.BoardDto;
-import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.HelpService;
 import com.sparta.marketkurlybe.validator.ErrorResult;

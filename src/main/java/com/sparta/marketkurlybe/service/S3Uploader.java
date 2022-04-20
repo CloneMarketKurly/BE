@@ -28,7 +28,6 @@ public class S3Uploader {
     private final AmazonS3 amazonS3;
 
     public void deleteImg (String fileName){
-//        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
         log.info("file name : "+ fileName);
         try {
             amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
@@ -38,9 +37,13 @@ public class S3Uploader {
     }
 
 
-    //유저 프로필 사진 업로드
-    public String upload(MultipartFile file) throws IOException {
+    public String fileNameCh(MultipartFile file){
         String fileName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(file.getOriginalFilename());
+        return fileName;
+    }
+
+        //유저 프로필 사진 업로드
+    public String upload(MultipartFile file, String fileName) throws IOException {
         amazonS3.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3.getUrl(bucket, fileName).toString();

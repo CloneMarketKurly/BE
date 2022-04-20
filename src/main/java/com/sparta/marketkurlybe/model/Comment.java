@@ -1,5 +1,6 @@
 package com.sparta.marketkurlybe.model;
 
+import com.sparta.marketkurlybe.dto.ComResponseDto;
 import com.sparta.marketkurlybe.dto.CommentDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -44,6 +45,12 @@ public class Comment extends Timestamped{
     private Item item;
 
     public Comment (CommentDto dto){
+        this.setUserId(dto.getUserId());
+        this.setComment(dto.getComment());
+        this.setTitle(dto.getTitle());
+    }
+
+    public Comment (ComResponseDto dto){
         this.setUserId(dto.getUserId());
         this.setComment(dto.getComment());
         this.setTitle(dto.getTitle());
