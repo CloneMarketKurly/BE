@@ -27,3 +27,7 @@
 
 ## 🐳  ERD
 ![스크린샷 2022-04-20 오후 10 16 54](https://user-images.githubusercontent.com/98807506/164242191-692527fa-a6c4-4805-9dea-c906b7219b87.png)
+
+## 🔨 API 설계 
+<img width="984" alt="스크린샷 2022-04-20 오후 11 00 57" src="https://user-images.githubusercontent.com/98807506/164247995-de2e99fd-cf5a-46ea-80fa-5fd28344592c.png">
+<img width="1040" alt="스크린샷 2022-04-20 오후 11 01 10" src="https://user-images.githubusercontent.com/98807506/164248017-4a7f6595-769f-415c-b672-b8257b829b0f.png">
