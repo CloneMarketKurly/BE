@@ -38,7 +38,7 @@ public class CommentController {
 
     @PostMapping("/{itemId}/comments")
     public Long newComment11 (@PathVariable Long itemId, @RequestPart(value = "hello") CommentDto commentDto,
-                              @RequestPart(value = "image") MultipartFile imgFile) throws IOException {
+                              @RequestPart(value = "image", required = false) MultipartFile imgFile) throws IOException {
         //업로드
         System.out.println(itemId);
         String img = s3Uploader.upload(commentDto, imgFile);
