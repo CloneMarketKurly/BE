@@ -15,7 +15,6 @@ public class BuyItemList extends Timestamped{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long buyItemListId;
 
     @OneToOne
