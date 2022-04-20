@@ -14,15 +14,13 @@ public class JwtTokenUtils {
     public static final String CLAIM_EXPIRED_DATE = "EXPIRED_DATE";
     public static final String CLAIM_USER_NAME = "USER_NAME";
     public static final String JWT_SECRET = "jwt_secret_!@#$%";
-    public static final String CLAIM_USER_ID = "USER_ID";
 
     public static String generateJwtToken(UserDetailsImpl userDetails) {
         String token = null;
         try {
             token = JWT.create()
                     .withIssuer("Mr.GenGar")
-                    .withClaim(CLAIM_USER_ID, userDetails.getUsername())
-                    .withClaim(CLAIM_USER_NAME, userDetails.getUserId())
+                    .withClaim(CLAIM_USER_NAME, userDetails.getUsername())
                     // 토큰 만료 일시 = 현재 시간 + 토큰 유효기간)
                     .withClaim(CLAIM_EXPIRED_DATE, new Date(System.currentTimeMillis() + JWT_TOKEN_VALID_MILLI_SEC))
                     .sign(generateAlgorithm());
