@@ -7,7 +7,6 @@ import com.sparta.marketkurlybe.model.*;
 import com.sparta.marketkurlybe.repository.*;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -104,7 +103,6 @@ public class BasketService {
                 () -> new NullPointerException("장바구니가 존재하지 않습니다.")
         );
         basketRepository.delete(basket);
-
     }
 
     // 장바구니 선택 삭제
@@ -118,11 +116,12 @@ public class BasketService {
 
     //장바구니 수정(선택 수량 변경)
     @Transactional
-    public void updateBasket(Long buyItemListId, BuyListPutDto responseDto) {
+    public Basket updateBasket(Long buyItemListId, BuyListPutDto responseDto, UserDetailsImpl userDetails) {
         BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
                 () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
         );
         buyItemList.setCount(responseDto.getCount());
+        return basketList(userDetails);
     }
 
     //최종 결제 완료 주문
