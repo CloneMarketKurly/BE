@@ -30,14 +30,17 @@ public class Comment extends Timestamped{
     private String image;
 
     @Column
+    private String imageName;
+
+    @Column
     private Integer helpCnt = 0;
 
     @Column
     @ColumnDefault("false")
-    private Boolean likeCheck = false;
+    private Boolean helpCheck = false;
 
     @ManyToOne
-    @JoinColumn(name = "ITEM_ID")
+//    @JoinColumn(name = "ITEM_ID")
     private Item item;
 
     public Comment (CommentDto dto){

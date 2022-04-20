@@ -15,6 +15,10 @@ public class Item extends Timestamped{
 //    @Column(name = "itemId")
     private Long id;
 
+//    @OneToOne
+//    @JoinColumn(name = "buyItemListId")
+//    private BuyItemList buyItemList;
+
     @Column(nullable = false)
     private String title;
 
