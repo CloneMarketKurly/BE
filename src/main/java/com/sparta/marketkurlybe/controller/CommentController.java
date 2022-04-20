@@ -4,7 +4,6 @@ package com.sparta.marketkurlybe.controller;
 import com.sparta.marketkurlybe.service.S3Uploader;
 import com.sparta.marketkurlybe.dto.CommentDto;
 import com.sparta.marketkurlybe.model.Comment;
-import com.sparta.marketkurlybe.repository.CommentRepository;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import com.sparta.marketkurlybe.service.CommentService;
 
@@ -45,8 +44,9 @@ public class CommentController {
         //업로드
         if (imgFile != null) {
 
-            String img = s3Uploader.upload(imgFile);
-            Comment comment = commentService.commentIn(itemId, commentDto,img);
+            String filename = s3Uploader.fileNameCh(imgFile);
+            String img = s3Uploader.upload(imgFile,filename );
+            Comment comment = commentService.commentIn(itemId, commentDto,img , filename);
 
             Map<String, String> com = new HashMap<>();
             com.put("commentID", comment.getCommentId().toString());
@@ -62,11 +62,17 @@ public class CommentController {
 
 
     @PutMapping("/comments/{commentId}")
-    public ResponseEntity<String> editComment (@PathVariable Long commentId, @RequestBody CommentDto commentDto,
-                                    @AuthenticationPrincipal UserDetailsImpl userDetails){
-        System.out.println(userDetails.getUsername());
+    public ResponseEntity<String> editComment (@PathVariable Long commentId,
+                                               @RequestPart(value = "comment") CommentDto commentDto,
+                                               @RequestPart(value = "image", required = false) MultipartFile imgFile,
+                                               @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+        if(imgFile != null) {
+            commentService.fileupdateComment(commentId, commentDto,userDetails.getUsername(), imgFile);
+            return ResponseEntity.ok("후기 수정 완료!");
+        } else {
             commentService.updateComment(commentId,commentDto, userDetails.getUsername());
-        return ResponseEntity.ok("후기 수정 완료!");
+            return ResponseEntity.ok("후기 수정 완료!");
+        }
     }
 
 
