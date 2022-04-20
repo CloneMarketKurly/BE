@@ -28,7 +28,6 @@ public class CommentController {
 
 
     private final CommentService commentService;
-    private final CommentRepository commentRepository;
     private final S3Uploader s3Uploader;
 
 

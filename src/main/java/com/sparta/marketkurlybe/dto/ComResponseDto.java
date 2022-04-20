@@ -24,6 +24,8 @@ public class ComResponseDto {
 
     private String image;
 
+    private Boolean helpCheck= false;
+
 
     public ComResponseDto(Comment comment){
         this.setUserId(comment.getUserId());
@@ -33,5 +35,6 @@ public class ComResponseDto {
         this.setModifiedAt(comment.getModifiedAt());
         this.setHelpCnt(comment.getHelpCnt());
         this.setImage(comment.getImage());
+        this.setHelpCheck(comment.getHelpCheck());
     }
 }

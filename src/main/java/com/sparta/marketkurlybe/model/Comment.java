@@ -37,10 +37,10 @@ public class Comment extends Timestamped{
 
     @Column
     @ColumnDefault("false")
-    private Boolean likeCheck = false;
+    private Boolean helpCheck = false;
 
     @ManyToOne
-    @JoinColumn(name = "ITEM_ID")
+//    @JoinColumn(name = "ITEM_ID")
     private Item item;
 
     public Comment (CommentDto dto){

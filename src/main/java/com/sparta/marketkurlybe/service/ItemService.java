@@ -31,9 +31,7 @@ public class ItemService {
 
     //메인페이지 조회
     public List<Item> getItemList() {
-      List<Item> itemList = itemRepository.findAll();
-        return itemList;
-
+        return itemRepository.findAll();
     }
 
     //상세페이지 조회

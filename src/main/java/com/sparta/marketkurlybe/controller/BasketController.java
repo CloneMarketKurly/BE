@@ -1,50 +1,50 @@
-package com.sparta.marketkurlybe.controller;
-
-import com.sparta.marketkurlybe.dto.BuyItemListDto;
-import com.sparta.marketkurlybe.dto.BuyListResponseDto;
-import com.sparta.marketkurlybe.model.Basket;
-import com.sparta.marketkurlybe.security.UserDetailsImpl;
-import com.sparta.marketkurlybe.service.BasketService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@RequestMapping("/item")
-@RequiredArgsConstructor
-public class BasketController {
-
-    private final BasketService basketService;
-
-    //유저정보는 장바구니에서 넣을 예정
-    @PostMapping("/basketList")
-    public void createBuyList(@RequestBody BuyItemListDto itemListDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        basketService.createBuyList(itemListDto, userDetails);
-    }
-
-    //결제 전 장바구니
-    @GetMapping("/basketList")
-    public Basket basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return basketService.basketList(userDetails);
-    }
-
-//    //장바구니 전체 삭제
-//    @DeleteMapping("/basketList/{basketId}/all")
-//    public void allDeleteBasket(@PathVariable Long basketId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-//        basketService.allDeleteBasket(basketId, userDetails);
+//package com.sparta.marketkurlybe.controller;
+//
+//import com.sparta.marketkurlybe.dto.BuyItemListDto;
+//import com.sparta.marketkurlybe.dto.BuyListResponseDto;
+//import com.sparta.marketkurlybe.model.Basket;
+//import com.sparta.marketkurlybe.security.UserDetailsImpl;
+//import com.sparta.marketkurlybe.service.BasketService;
+//import lombok.RequiredArgsConstructor;
+//import org.springframework.security.core.annotation.AuthenticationPrincipal;
+//import org.springframework.web.bind.annotation.*;
+//
+//@RestController
+//@RequestMapping("/item")
+//@RequiredArgsConstructor
+//public class BasketController {
+//
+//    private final BasketService basketService;
+//
+//    //유저정보는 장바구니에서 넣을 예정
+//    @PostMapping("/basketList")
+//    public void createBuyList(@RequestBody BuyItemListDto itemListDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+//        basketService.createBuyList(itemListDto, userDetails);
 //    }
-
-    //장바구니 선택 삭제
-    @DeleteMapping("/basketList/{buyItemListId}")
-    public void deleteBasket(@PathVariable Long buyItemListId) {
-        basketService.deleteBasket(buyItemListId);
-    }
-
-    //선택 상품 수정
-    @PutMapping("/basketList/{buyItemListId}")
-    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListResponseDto responseDto){
-        basketService.updateBasket(buyItemListId, responseDto);
-
-    }
-
-}
+//
+//    //결제 전 장바구니
+//    @GetMapping("/basketList")
+//    public Basket basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
+//        return basketService.basketList(userDetails);
+//    }
+//
+////    //장바구니 전체 삭제
+////    @DeleteMapping("/basketList/{basketId}/all")
+////    public void allDeleteBasket(@PathVariable Long basketId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+////        basketService.allDeleteBasket(basketId, userDetails);
+////    }
+//
+//    //장바구니 선택 삭제
+//    @DeleteMapping("/basketList/{buyItemListId}")
+//    public void deleteBasket(@PathVariable Long buyItemListId) {
+//        basketService.deleteBasket(buyItemListId);
+//    }
+//
+//    //선택 상품 수정
+//    @PutMapping("/basketList/{buyItemListId}")
+//    public void updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListResponseDto responseDto){
+//        basketService.updateBasket(buyItemListId, responseDto);
+//
+//    }
+//
+//}

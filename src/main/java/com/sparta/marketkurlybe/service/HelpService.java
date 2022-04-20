@@ -36,13 +36,13 @@ public class HelpService {
             Help help = new Help(commentId, userId);
             helpRepository.save(help);
             comment.setHelpCnt(comment.getHelpCnt()+1);
-            comment.setLikeCheck(true);
+            comment.setHelpCheck(true);
             return itemService.getItemDetails(itemId);
         }
 
         helpRepository.deleteByCommentIdAndUserId(commentId, userId);
         comment.setHelpCnt(comment.getHelpCnt()-1);
-        comment.setLikeCheck(false);
+        comment.setHelpCheck(false);
         return itemService.getItemDetails(itemId);
     }
 

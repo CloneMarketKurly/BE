@@ -17,13 +17,13 @@ public class BuyItemList extends Timestamped{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buyItemListId;
 
-    @OneToOne
-    @JoinColumn(name = "userId")
-    private User user;
+//    @OneToOne
+//    @JoinColumn(name = "userId")
+//    private User user;
 
-    @OneToOne
-    @JoinColumn(name = "itemId")
-    private Item item;
+//    @OneToOne
+//    @JoinColumn(name = "itemId")
+//    private Item item;
 
     @Column(nullable = false)
     private int count;
