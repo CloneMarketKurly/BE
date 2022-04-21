@@ -5,13 +5,11 @@ import com.sparta.marketkurlybe.model.*;
 import com.sparta.marketkurlybe.repository.*;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.lang.management.LockInfo;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,13 +33,19 @@ public class BasketService {
                 () -> new NullPointerException("상품이 존재하지 않습니다.")
         );
 
-        BuyItemList buyItemList = BuyItemList.builder()
-                .user(user)
-                .item(item)
-                .count(itemListDto.getCount())
-                .build();
+        Optional<BuyItemList> find = buyItemListRepository.findByItem_IdAndUser_Id(itemListDto.getItemId(), user.getId());
 
-        buyItemListRepository.save(buyItemList);
+        if (find.isPresent()){
+            find.get().setCount(itemListDto.getCount()+find.get().getCount());
+        }else {
+            BuyItemList buyItemList = BuyItemList.builder()
+                    .user(user)
+                    .item(item)
+                    .count(itemListDto.getCount())
+                    .build();
+
+            buyItemListRepository.save(buyItemList);
+        }
     }
 
     //결제전 장바구니 조회 + 징바구니 저장 + 수정
