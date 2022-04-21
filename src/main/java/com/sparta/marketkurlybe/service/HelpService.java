@@ -45,9 +45,4 @@ public class HelpService {
         comment.setHelpCheck(false);
         return itemService.getItemDetails(itemId);
     }
-
-
-    public ErrorResult createBoard(Long detailId, List<MultipartFile> files, String comment, UserDetailsImpl userDetails) {
-        return null;
-    }
 }

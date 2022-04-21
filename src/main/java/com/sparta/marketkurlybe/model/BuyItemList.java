@@ -23,6 +23,10 @@ public class BuyItemList extends Timestamped {
     @JoinColumn(name = "itemId")
     private Item item;
 
+    @ManyToOne
+    @JoinColumn(name = "basketId")
+    private Basket basket;
+
     @Column(nullable = false)
     private int count;
 

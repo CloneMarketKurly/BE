@@ -21,7 +21,7 @@ public class Basket extends Timestamped {
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "basket")
     private List<BuyItemList> buyItemList;
 
     @Column
