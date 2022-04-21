@@ -7,6 +7,7 @@ import com.sparta.marketkurlybe.model.*;
 import com.sparta.marketkurlybe.repository.*;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -33,12 +34,23 @@ public class BasketService {
         Item item = itemRepository.findById(itemListDto.getItemId()).orElseThrow(
                 () -> new NullPointerException("상품이 존재하지 않습니다.")
         );
+//
+//        List<BuyItemList> find = buyItemListRepository.findByUser_Id(user.getId());
+
+
 
         BuyItemList buyItemList = BuyItemList.builder()
                 .user(user)
                 .item(item)
                 .count(itemListDto.getCount())
                 .build();
+
+//        for (BuyItemList finds : find){
+//            if (finds.getItem().getId().equals(itemListDto.getItemId())){
+//
+//
+//            }
+//        }
 
         buyItemListRepository.save(buyItemList);
     }
@@ -107,7 +119,11 @@ public class BasketService {
 
     // 장바구니 선택 삭제
     @Transactional
-    public void deleteBasket(Long buyItemListId) {
+    public void deleteBasket(Long buyItemListId, UserDetailsImpl userDetails) {
+        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
+                () -> new NullPointerException("회원정보가 존재하지 않습니다.")
+        );
+
         BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
                 () -> new NullPointerException("상품이 존재하지 않습니다.")
         );
@@ -120,6 +136,9 @@ public class BasketService {
         BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
                 () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
         );
+
+        //해당된 친구만 보내기
+        //수정된 배송비만 보낼 수 있는 로직(바뀐 친구랑 배송비 총 가격)
         buyItemList.setCount(responseDto.getCount());
         return basketList(userDetails);
     }
