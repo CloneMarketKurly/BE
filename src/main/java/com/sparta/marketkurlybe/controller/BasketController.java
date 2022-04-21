@@ -32,8 +32,8 @@ public class BasketController {
 
     //장바구니 선택 삭제(삭제하면, 자동으로 장바구니 조회에 삭제된 정보 반영 됨)
     @DeleteMapping("/basketList/{buyItemListId}")
-    public void deleteBasket(@PathVariable Long buyItemListId) {
-        basketService.deleteBasket(buyItemListId);
+    public void deleteBasket(@PathVariable Long buyItemListId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        basketService.deleteBasket(buyItemListId, userDetails);
     }
 
     //선택 상품 수정
