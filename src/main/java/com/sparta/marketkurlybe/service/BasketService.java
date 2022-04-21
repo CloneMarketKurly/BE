@@ -146,6 +146,7 @@ public class BasketService {
 
         BasketPutDto basketPutDto = BasketPutDto.builder()
                 .sumPrice(basket.getSumPrice())
+                .count(responseDto.getCount())
                 .deliverFee(basket.getDeliverFee())
                 .totalPrice(basket.getTotalPrice())
                 .buyItemList(buyItemList2)
