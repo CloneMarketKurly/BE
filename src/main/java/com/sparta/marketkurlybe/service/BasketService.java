@@ -34,23 +34,12 @@ public class BasketService {
         Item item = itemRepository.findById(itemListDto.getItemId()).orElseThrow(
                 () -> new NullPointerException("상품이 존재하지 않습니다.")
         );
-//
-//        List<BuyItemList> find = buyItemListRepository.findByUser_Id(user.getId());
-
-
 
         BuyItemList buyItemList = BuyItemList.builder()
                 .user(user)
                 .item(item)
                 .count(itemListDto.getCount())
                 .build();
-
-//        for (BuyItemList finds : find){
-//            if (finds.getItem().getId().equals(itemListDto.getItemId())){
-//
-//
-//            }
-//        }
 
         buyItemListRepository.save(buyItemList);
     }
@@ -74,16 +63,6 @@ public class BasketService {
             int sum = price * cnt;
             sumPrice += sum;
         }
-//        List<BilDto> bilDtoList = new ArrayList<>();
-//        for (BuyItemList b : buyItemList){
-//            BilDto bilDto = BilDto.builder()
-//                    .buyItemListId(b.getBuyItemListId())
-//                    .user(b.getUser())
-//                    .item(b.getItem())
-//                    .count(b.getCount())
-//                    .build();
-//            bilDtoList.add(bilDto);
-//        }
 
         if (sumPrice < 40000){
             deliverFee += 3000;
@@ -141,18 +120,36 @@ public class BasketService {
         buyItemListRepository.delete(buyItemList);
     }
 
-    //장바구니 수정(선택 수량 변경)
-//    @Transactional
-//    public Basket updateBasket(Long buyItemListId, BuyListPutDto responseDto, UserDetailsImpl userDetails) {
-//        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
-//                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
-//        );
-//
-//        //해당된 친구만 보내기
-//        //수정된 배송비만 보낼 수 있는 로직(바뀐 친구랑 배송비 총 가격)
-//        buyItemList.setCount(responseDto.getCount());
-//        return basketList(userDetails);
-//    }
+//    장바구니 수정(선택 수량 변경)
+    @Transactional
+    public BasketPutDto updateBasket(Long buyItemListId, BuyListPutDto responseDto, UserDetailsImpl userDetails) {
+        User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
+                () -> new NullPointerException("회원정보가 존재하지 않습니다.")
+        );
+        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
+                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
+        );
+
+        //해당된 친구만 보내기
+        //수정된 배송비만 보낼 수 있는 로직(바뀐 친구랑 배송비 총 가격)
+        buyItemList.setCount(responseDto.getCount());
+
+        BuyItemList buyItemList2 = buyItemListRepository.findById(buyItemListId).orElseThrow(
+                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
+        );
+
+        BasketDto basket = basketList(userDetails);
+
+        BasketPutDto basketPutDto = BasketPutDto.builder()
+                .sumPrice(basket.getSumPrice())
+                .deliverFee(basket.getDeliverFee())
+                .totalPrice(basket.getTotalPrice())
+                .buyItemList(buyItemList2)
+                .build();
+
+        return basketPutDto;
+    }
+
 
     //최종 결제 완료 주문
     @Transactional
