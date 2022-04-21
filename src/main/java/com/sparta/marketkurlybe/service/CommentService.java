@@ -61,15 +61,9 @@ public class CommentService {
         if(!comment.getUserId().equals(userId)){
             throw new IllegalArgumentException("작성자 본인만 수정 가능합니다.");
         }
-        if(comment.getImage() != null){
-            s3Uploader.deleteImg(comment.getImageName());
-            comment.setImage(null);
-            comment.setImageName(null);
-        }
         comment.setComment(commentDto.getComment());
         comment.setUserId(commentDto.getUserId());
         comment.setTitle(commentDto.getTitle());
-
     }
     //후기 수정 사진 있을 때
     @Transactional
