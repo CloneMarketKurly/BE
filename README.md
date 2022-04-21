@@ -44,6 +44,17 @@
 ## 🐳  ERD
 ![스크린샷 2022-04-20 오후 10 16 54](https://user-images.githubusercontent.com/98807506/164242191-692527fa-a6c4-4805-9dea-c906b7219b87.png)
 
+## 🏹 Trouble Shooting
+- 장바구니에서 목록 삭제시 외래키 문제로 삭제가 안됨
+→ OneToMany 단방향 관계로 형성을 했는데, 외래키를 갖고있는 테이블이 없어서 외래키 참조 문제로 삭제가 되지 않음.
+     ManyToOne 양방향 관계로 만들어주고, mapped를 이용해 외래키의 주인을 명시해줬다.
+
+- 장바구니에 중복 상품을 담을 시, 수량이 추가되는 것이 아니라 새로운 목록으로 추가됨
+→ 조건문을 추가해줘서 매우 잘 훌륭히 해결
+
+- 테이블 이름을 Order 만들어서, SQL 예약어로 인한 에러
+→ 테이블 이름을 Orders로 수정
+
 ## 🔨 API 설계 
 <img width="984" alt="스크린샷 2022-04-20 오후 11 00 57" src="https://user-images.githubusercontent.com/98807506/164247995-de2e99fd-cf5a-46ea-80fa-5fd28344592c.png">
 <img width="1040" alt="스크린샷 2022-04-20 오후 11 01 10" src="https://user-images.githubusercontent.com/98807506/164248017-4a7f6595-769f-415c-b672-b8257b829b0f.png">
