@@ -14,5 +14,6 @@ public class BasketPutDto {
     private int deliverFee;
     private int totalPrice;
     private int sumPrice;
+    private int count;
     private BuyItemList buyItemList;
 }
