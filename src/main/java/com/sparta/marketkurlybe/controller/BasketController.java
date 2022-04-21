@@ -1,5 +1,6 @@
 package com.sparta.marketkurlybe.controller;
 
+import com.sparta.marketkurlybe.dto.BasketDto;
 import com.sparta.marketkurlybe.dto.BuyItemListDto;
 import com.sparta.marketkurlybe.dto.BuyListPutDto;
 import com.sparta.marketkurlybe.dto.OrdersRequestDto;
@@ -26,7 +27,7 @@ public class BasketController {
 
     //결제 전 장바구니 조회 + 장바구니 저장 + 장바구니 수정
     @GetMapping("/basketList")
-    public Basket basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public BasketDto basketList(@AuthenticationPrincipal UserDetailsImpl userDetails){
         return basketService.basketList(userDetails);
     }
 
@@ -37,10 +38,10 @@ public class BasketController {
     }
 
     //선택 상품 수정
-    @PutMapping("/basketList/{buyItemListId}")
-    public Basket updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListPutDto responseDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return basketService.updateBasket(buyItemListId, responseDto, userDetails);
-    }
+//    @PutMapping("/basketList/{buyItemListId}")
+//    public Basket updateBasket(@PathVariable Long buyItemListId, @RequestBody BuyListPutDto responseDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+//        return basketService.updateBasket(buyItemListId, responseDto, userDetails);
+//    }
 
     //결제완료 주문서 저장
     @PostMapping("/basketList/order")

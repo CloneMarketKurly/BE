@@ -1,8 +1,6 @@
 package com.sparta.marketkurlybe.service;
 
-import com.sparta.marketkurlybe.dto.BuyItemListDto;
-import com.sparta.marketkurlybe.dto.BuyListPutDto;
-import com.sparta.marketkurlybe.dto.OrdersRequestDto;
+import com.sparta.marketkurlybe.dto.*;
 import com.sparta.marketkurlybe.model.*;
 import com.sparta.marketkurlybe.repository.*;
 import com.sparta.marketkurlybe.security.UserDetailsImpl;
@@ -11,6 +9,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.lang.management.LockInfo;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,7 +57,7 @@ public class BasketService {
 
     //결제전 장바구니 조회 + 징바구니 저장 + 수정
     @Transactional
-    public Basket basketList(UserDetailsImpl userDetails) {
+    public BasketDto basketList(UserDetailsImpl userDetails) {
 
         //ToDo : Method GET
         User user = userRepository.findByUserId(userDetails.getUsername()).orElseThrow(
@@ -74,6 +74,16 @@ public class BasketService {
             int sum = price * cnt;
             sumPrice += sum;
         }
+//        List<BilDto> bilDtoList = new ArrayList<>();
+//        for (BuyItemList b : buyItemList){
+//            BilDto bilDto = BilDto.builder()
+//                    .buyItemListId(b.getBuyItemListId())
+//                    .user(b.getUser())
+//                    .item(b.getItem())
+//                    .count(b.getCount())
+//                    .build();
+//            bilDtoList.add(bilDto);
+//        }
 
         if (sumPrice < 40000){
             deliverFee += 3000;
@@ -105,7 +115,8 @@ public class BasketService {
             basket.setSumPrice(basket.getSumPrice());
             basket.setTotalPrice(basket.getTotalPrice());
         }
-        return basket;
+
+        return new BasketDto(basket);
     }
 
     //장바구니 전체 삭제(개발자용)
@@ -131,17 +142,17 @@ public class BasketService {
     }
 
     //장바구니 수정(선택 수량 변경)
-    @Transactional
-    public Basket updateBasket(Long buyItemListId, BuyListPutDto responseDto, UserDetailsImpl userDetails) {
-        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
-                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
-        );
-
-        //해당된 친구만 보내기
-        //수정된 배송비만 보낼 수 있는 로직(바뀐 친구랑 배송비 총 가격)
-        buyItemList.setCount(responseDto.getCount());
-        return basketList(userDetails);
-    }
+//    @Transactional
+//    public Basket updateBasket(Long buyItemListId, BuyListPutDto responseDto, UserDetailsImpl userDetails) {
+//        BuyItemList buyItemList = buyItemListRepository.findById(buyItemListId).orElseThrow(
+//                () -> new NullPointerException("상품 정보가 존재하지 않습니다.")
+//        );
+//
+//        //해당된 친구만 보내기
+//        //수정된 배송비만 보낼 수 있는 로직(바뀐 친구랑 배송비 총 가격)
+//        buyItemList.setCount(responseDto.getCount());
+//        return basketList(userDetails);
+//    }
 
     //최종 결제 완료 주문
     @Transactional
